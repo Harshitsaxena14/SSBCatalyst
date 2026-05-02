@@ -1,0 +1,1277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SSB Catalyst</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Playfair+Display:wght@600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWix+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkR4j8a+I1Q1pUCe5xk2f9fR7u7fX8n2c4Vg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <style>
+    :root {
+      --bg-main: #f5f1e8;
+      --text-main: #1a1a1a;
+      --accent: #4b5d3a;
+      --muted: #6b6b6b;
+      --border-soft: rgba(26, 26, 26, 0.06);
+      --border-hover: rgba(26, 26, 26, 0.12);
+      --meta-60: rgba(26, 26, 26, 0.6);
+      --secondary-75: rgba(26, 26, 26, 0.75);
+      --nav-80: rgba(26, 26, 26, 0.8);
+      --overlay: rgba(0, 0, 0, 0.4);
+      --button-on-accent: #ffffff;
+      --line-accent: rgba(75, 93, 58, 0.45);
+      --radius: 12px;
+      --container: 1100px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      font-family: "Inter", sans-serif;
+      color: var(--text-main);
+      background-color: var(--bg-main);
+      line-height: 1.6;
+      position: relative;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      background-image:
+        linear-gradient(rgba(26, 26, 26, 0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(26, 26, 26, 0.03) 1px, transparent 1px);
+      background-size: 36px 36px;
+      opacity: 0.3;
+      z-index: -1;
+    }
+
+    img {
+      max-width: 100%;
+      display: block;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 100%;
+      margin: 0 auto;
+    }
+
+    .section {
+      width: 100%;
+      padding: 96px 20px;
+      border-top: 1px solid var(--border-soft);
+    }
+
+    .section-label {
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: var(--meta-60);
+      margin-bottom: 12px;
+      display: inline-block;
+      font-weight: 600;
+    }
+
+    h1, h2, h3 {
+      margin: 0 0 16px;
+      line-height: 1.2;
+      font-family: "Playfair Display", serif;
+      color: var(--text-main);
+    }
+
+    h1 {
+      font-size: clamp(2rem, 4.1vw, 4rem);
+      letter-spacing: 0.01em;
+      line-height: 1.1;
+    }
+
+    h2 {
+      font-size: clamp(1.55rem, 3vw, 2.5rem);
+    }
+
+    h3 {
+      font-size: 1.2rem;
+    }
+
+    p {
+      margin: 0 0 12px;
+      color: var(--secondary-75);
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      padding: 0.78rem 1.15rem;
+      border-radius: 10px;
+      border: 1px solid transparent;
+      font-weight: 600;
+      cursor: pointer;
+      transition: opacity 0.2s ease, border-color 0.2s ease, background-color 0.2s ease;
+      font-size: 0.94rem;
+    }
+
+    .btn:hover {
+      opacity: 0.88;
+    }
+
+    .btn-primary {
+      background: var(--accent);
+      color: var(--button-on-accent);
+      border-color: var(--accent);
+    }
+
+    .btn-primary:hover {
+      border-color: rgba(75, 93, 58, 0.85);
+    }
+
+    .btn-outline {
+      border-color: var(--border-soft);
+      color: var(--text-main);
+      background: transparent;
+    }
+
+    .btn-outline:hover {
+      border-color: var(--border-hover);
+      background: rgba(26, 26, 26, 0.03);
+    }
+
+    .card {
+      background: transparent;
+      border: 1px solid var(--border-soft);
+      border-radius: var(--radius);
+      box-shadow: none;
+      transition: border-color 0.2s ease, background-color 0.2s ease;
+    }
+
+    .card:hover {
+      border-color: var(--border-hover);
+      background: rgba(255, 255, 255, 0.18);
+    }
+
+    .topbar-wrap {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      width: 100%;
+      backdrop-filter: blur(4px);
+      background: rgba(245, 241, 232, 0.9);
+      border-bottom: 1px solid var(--border-soft);
+    }
+
+    .navbar {
+      min-height: 74px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      width: 100%;
+      max-width: 100%;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    .brand {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .brand-title {
+      font-family: "Playfair Display", serif;
+      font-weight: 800;
+      letter-spacing: 0.12em;
+      font-size: 1.05rem;
+    }
+
+    .brand-tagline {
+      font-size: 0.72rem;
+      color: var(--meta-60);
+      letter-spacing: 0.05em;
+    }
+
+    .menu-toggle {
+      display: none;
+      width: 42px;
+      height: 42px;
+      border-radius: 10px;
+      background: rgba(26, 26, 26, 0.03);
+      border: 1px solid var(--border-soft);
+      color: var(--text-main);
+      cursor: pointer;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .nav-links a {
+      color: var(--nav-80);
+      font-weight: 500;
+      font-size: 0.95rem;
+      position: relative;
+    }
+
+    .nav-links a::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: -6px;
+      width: 0;
+      height: 2px;
+      background: var(--accent);
+      transition: width 0.25s ease;
+    }
+
+    .nav-links a:hover::after {
+      width: 100%;
+    }
+
+    .hero {
+      width: 100%;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      padding: 60px 20px;
+      background-color: var(--bg-main);
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 1.4rem;
+      align-items: stretch;
+      width: 100%;
+      max-width: 1280px;
+      margin: 0 auto;
+    }
+
+    .hero-main,
+    .hero-side {
+      padding: 1.6rem;
+    }
+
+    .hero-tagline {
+      color: var(--meta-60);
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      font-size: 0.78rem;
+      font-weight: 700;
+      margin-bottom: 12px;
+      display: block;
+    }
+
+    .hero-main p {
+      max-width: 64ch;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.8rem;
+      margin: 1.2rem 0;
+    }
+
+    .check-list {
+      list-style: none;
+      padding: 0;
+      margin: 1rem 0 0;
+      display: grid;
+      gap: 0.65rem;
+    }
+
+    .check-list li {
+      display: flex;
+      gap: 0.6rem;
+      align-items: flex-start;
+      color: var(--text-main);
+    }
+
+    .check-list i {
+      margin-top: 0.3rem;
+      color: var(--accent);
+    }
+
+    .batch-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+      background: rgba(75, 93, 58, 0.08);
+      color: var(--accent);
+      border: 1px solid var(--line-accent);
+      padding: 0.55rem 0.9rem;
+      border-radius: 999px;
+      font-weight: 600;
+      margin-bottom: 1rem;
+    }
+
+    .steps {
+      display: grid;
+      gap: 0.85rem;
+      margin: 1rem 0 0;
+    }
+
+    .step {
+      border: 1px solid var(--border-soft);
+      border-radius: 12px;
+      padding: 0.9rem;
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 0.8rem;
+      align-items: center;
+      background: rgba(255, 255, 255, 0.2);
+    }
+
+    .step-number {
+      width: 2.2rem;
+      height: 2.2rem;
+      border-radius: 999px;
+      border: 1px solid var(--accent);
+      display: grid;
+      place-items: center;
+      font-weight: 700;
+      color: var(--accent);
+      font-size: 0.9rem;
+    }
+
+    .hero-foot {
+      margin-top: 1rem;
+      color: var(--secondary-75);
+      font-weight: 500;
+    }
+
+    .pill-grid {
+      margin-top: 1.2rem;
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 0.85rem;
+    }
+
+    .pill {
+      padding: 0.85rem 0.95rem;
+      border-radius: 12px;
+      border: 1px solid var(--border-soft);
+      background: rgba(255, 255, 255, 0.2);
+      color: var(--secondary-75);
+      font-size: 0.93rem;
+    }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.1rem;
+      align-items: start;
+    }
+
+    .mentor-card {
+      padding: 1.4rem;
+    }
+
+    .avatar {
+      width: 88px;
+      height: 88px;
+      border-radius: 999px;
+      border: 1px solid var(--line-accent);
+      background: rgba(75, 93, 58, 0.1);
+      display: grid;
+      place-items: center;
+      font-weight: 700;
+      font-size: 1.2rem;
+      color: var(--accent);
+      margin-bottom: 1rem;
+    }
+
+    .skills-list {
+      list-style: none;
+      padding: 0;
+      margin: 0.9rem 0 0;
+      display: grid;
+      gap: 0.5rem;
+    }
+
+    .skills-list li {
+      display: flex;
+      gap: 0.55rem;
+      align-items: center;
+    }
+
+    .skills-list li i {
+      color: var(--accent);
+    }
+
+    .social-row {
+      margin-top: 1rem;
+      display: flex;
+      gap: 0.65rem;
+      flex-wrap: wrap;
+    }
+
+    .social-btn {
+      border: 1px solid var(--border-soft);
+      background: transparent;
+      color: var(--secondary-75);
+      padding: 0.52rem 0.78rem;
+      border-radius: 999px;
+      font-size: 0.9rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      transition: 0.2s ease;
+    }
+
+    .social-btn:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+      background: rgba(75, 93, 58, 0.08);
+    }
+
+    .program-grid,
+    .stories-grid,
+    .mentor-grid,
+    .testimonial-grid,
+    .stats-grid {
+      display: grid;
+      gap: 0.95rem;
+    }
+
+    .program-grid {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      margin-top: 1rem;
+    }
+
+    .program-card {
+      padding: 1.1rem;
+    }
+
+    .program-card h3 {
+      margin-bottom: 8px;
+    }
+
+    .why-box {
+      padding: 1.35rem;
+    }
+
+    .plain-list {
+      margin: 0.9rem 0 0;
+      padding-left: 1.1rem;
+      color: var(--secondary-75);
+    }
+
+    .plain-list li {
+      margin-bottom: 0.4rem;
+    }
+
+    .results-head {
+      margin-bottom: 1rem;
+    }
+
+    .stats-grid {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      margin-bottom: 1rem;
+    }
+
+    .stat {
+      text-align: center;
+      padding: 1rem;
+    }
+
+    .stat strong {
+      display: block;
+      font-size: clamp(1.25rem, 2.2vw, 1.8rem);
+      color: var(--accent);
+      margin-bottom: 3px;
+      font-family: "Playfair Display", serif;
+    }
+
+    .testimonial-grid {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    blockquote {
+      margin: 0;
+      padding: 1.05rem;
+      border-left: 3px solid var(--accent);
+      border-radius: 12px;
+      background: rgba(255, 255, 255, 0.2);
+      color: var(--secondary-75);
+      font-style: italic;
+    }
+
+    .stories-grid {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .student-card,
+    .mentor-panel {
+      padding: 1.1rem;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .student-card .avatar,
+    .mentor-panel .avatar {
+      margin: 0 auto 0.8rem;
+      width: 100px;
+      height: 100px;
+    }
+
+    .student-card img {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      border: 2px solid var(--line-accent);
+      object-fit: cover;
+      margin-bottom: 0.8rem;
+    }
+
+    .student-entry {
+      font-size: 0.8rem;
+      color: var(--accent);
+      font-weight: 700;
+      text-transform: uppercase;
+      margin: 0.4rem 0;
+      letter-spacing: 0.05em;
+    }
+
+    .student-year {
+      font-size: 0.85rem;
+      color: var(--meta-60);
+      margin: 0.3rem 0 0.8rem;
+    }
+
+    .student-testimonial {
+      font-style: italic;
+      color: var(--secondary-75);
+      font-size: 0.9rem;
+    }
+
+    .mentor-grid {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .timeline {
+      margin-top: 1rem;
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 0.9rem;
+    }
+
+    .timeline-step {
+      padding: 1rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .timeline-step::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 3px;
+      background: linear-gradient(90deg, var(--line-accent), transparent);
+    }
+
+    .faq-wrap {
+      margin-top: 1rem;
+      display: grid;
+      gap: 0.7rem;
+    }
+
+    .faq-item {
+      border: 1px solid var(--border-soft);
+      border-radius: 12px;
+      background: rgba(255, 255, 255, 0.16);
+      overflow: hidden;
+    }
+
+    .faq-btn {
+      width: 100%;
+      text-align: left;
+      padding: 0.95rem 1rem;
+      border: none;
+      background: transparent;
+      color: var(--text-main);
+      font-size: 0.98rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      cursor: pointer;
+    }
+
+    .faq-content {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.28s ease;
+      color: var(--secondary-75);
+      padding: 0 1rem;
+    }
+
+    .faq-item.active .faq-content {
+      max-height: 140px;
+      padding-bottom: 0.9rem;
+    }
+
+    .faq-item.active .faq-btn i {
+      transform: rotate(180deg);
+    }
+
+    .faq-btn i {
+      transition: transform 0.2s ease;
+      color: var(--accent);
+    }
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1rem;
+    }
+
+    .form-card {
+      padding: 1.15rem;
+    }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 0.75rem;
+      margin-top: 0.9rem;
+    }
+
+    .field {
+      display: flex;
+      flex-direction: column;
+      gap: 0.3rem;
+    }
+
+    .field label {
+      font-size: 0.84rem;
+      color: var(--meta-60);
+    }
+
+    input,
+    select,
+    textarea {
+      background: rgba(255, 255, 255, 0.32);
+      border: 1px solid var(--border-soft);
+      color: var(--text-main);
+      border-radius: 10px;
+      padding: 0.66rem 0.7rem;
+      font: inherit;
+    }
+
+    input:focus,
+    select:focus,
+    textarea:focus {
+      outline: 2px solid rgba(75, 93, 58, 0.2);
+      border-color: var(--accent);
+    }
+
+    textarea {
+      min-height: 120px;
+      resize: vertical;
+    }
+
+    .form-full-width {
+      grid-column: 1 / -1;
+    }
+
+    .form-actions {
+      margin-top: 0.95rem;
+    }
+
+    .cta-banner {
+      margin-top: 0.8rem;
+      padding: 1.4rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .cta-actions {
+      display: flex;
+      gap: 0.7rem;
+      flex-wrap: wrap;
+    }
+
+    footer {
+      padding: 26px 0 32px;
+      border-top: 1px solid var(--border-soft);
+    }
+
+    .footer-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 0.8rem;
+      flex-wrap: wrap;
+    }
+
+    .fade-up {
+      animation: none;
+    }
+
+    @keyframes fadeUp {
+      from {
+        transform: translateY(10px);
+        opacity: 0;
+      }
+      to {
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
+
+    @media (max-width: 1000px) {
+      .hero-grid,
+      .about-grid,
+      .timeline {
+        grid-template-columns: 1fr;
+      }
+
+      .program-grid,
+      .stories-grid,
+      .mentor-grid,
+      .testimonial-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .stats-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 780px) {
+      .menu-toggle {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .menu-backdrop {
+        position: fixed;
+        inset: 0;
+        background: var(--overlay);
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 0.2s ease;
+        z-index: 900;
+      }
+
+      .menu-backdrop.show {
+        opacity: 1;
+        pointer-events: auto;
+      }
+
+      .nav-links {
+        position: absolute;
+        top: 74px;
+        right: 1rem;
+        left: 1rem;
+        background: rgba(245, 241, 232, 0.98);
+        border: 1px solid var(--border-soft);
+        border-radius: 12px;
+        padding: 0.7rem;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.3rem;
+        display: none;
+        z-index: 950;
+      }
+
+      .nav-links.open {
+        display: flex;
+      }
+
+      .nav-links li {
+        width: 100%;
+      }
+
+      .nav-links a,
+      .nav-links .btn {
+        width: 100%;
+        text-align: left;
+      }
+
+      .nav-links .btn {
+        justify-content: center;
+      }
+
+      .pill-grid,
+      .program-grid,
+      .stories-grid,
+      .mentor-grid,
+      .testimonial-grid,
+      .stats-grid,
+      .form-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .section {
+        padding: 64px 20px;
+      }
+
+      .hero {
+        min-height: 80vh;
+      }
+    }
+
+    .accent-word {
+      color: var(--accent);
+    }
+  </style>
+</head>
+<body>
+  <div class="menu-backdrop" id="menuBackdrop" aria-hidden="true"></div>
+  <div class="topbar-wrap">
+    <nav class="navbar">
+      <a href="#" class="brand" aria-label="SSB Catalyst Home">
+        <span class="brand-title">SSB CATALYST</span>
+        <span class="brand-tagline">Clarity. Confidence. Recommendation.</span>
+      </a>
+
+      <button class="menu-toggle" id="menuToggle" aria-label="Toggle navigation" aria-expanded="false">
+        <i class="fa-solid fa-bars"></i>
+      </button>
+
+      <ul class="nav-links" id="navLinks">
+        <li><a href="#about">About</a></li>
+        <li><a href="#programs">Programs</a></li>
+        <li><a href="#results">Results</a></li>
+        <li><a href="#mentors">Mentors</a></li>
+        <li><a href="#faq">FAQ</a></li>
+        <li><a href="#contact" class="btn btn-primary">Book Demo</a></li>
+      </ul>
+    </nav>
+  </div>
+
+  <header class="hero">
+    <div class="hero-grid">
+      <div class="hero-main card fade-up">
+        <span class="hero-tagline">SSB Coaching For Serious Defence Aspirants</span>
+        <h1>28 Attempts to <span class="accent-word">AIR 12</span>. The Ultimate <span class="accent-word">Comeback</span>.</h1>
+        <p>Train smarter for the Services Selection Board with a sharper, more personal approach.</p>
+
+        <div class="hero-actions">
+          <a href="#contact" class="btn btn-primary">Enroll Now</a>
+          <a href="#programs" class="btn btn-outline">Explore Programs</a>
+        </div>
+
+        <ul class="check-list">
+          <li><i class="fa-solid fa-circle-check"></i><span>Screening strategy and PPDT support</span></li>
+          <li><i class="fa-solid fa-circle-check"></i><span>Psychology, GTO and interview preparation</span></li>
+          <li><i class="fa-solid fa-circle-check"></i><span>Focused mentorship and performance feedback</span></li>
+        </ul>
+
+        <p class="hero-foot">Built for NDA, CDS, AFCAT, TES, SSC Tech and other defence aspirants.</p>
+
+        <div class="pill-grid">
+          <div class="pill"><strong>Preparation Model:</strong> Realistic, honest, personality-first SSB guidance</div>
+          <div class="pill"><strong>Core Focus:</strong> OLQs, communication, situation handling and self-awareness</div>
+          <div class="pill"><strong>Ideal For:</strong> Fresh aspirants and repeaters who want structured preparation</div>
+        </div>
+      </div>
+
+      <aside class="hero-side card fade-up">
+        <div class="batch-badge"><i class="fa-solid fa-bullhorn"></i> Next Batch - Admissions Open</div>
+
+        <div class="steps">
+          <div class="step">
+            <div class="step-number">01</div>
+            <p>Mock interview and storytelling drills</p>
+          </div>
+          <div class="step">
+            <div class="step-number">02</div>
+            <p>OLQ-based evaluation with personal feedback</p>
+          </div>
+          <div class="step">
+            <div class="step-number">03</div>
+            <p>Routine, discipline, clarity and confidence building</p>
+          </div>
+        </div>
+      </aside>
+    </div>
+  </header>
+
+  <main>
+    <section id="about" class="section">
+      <div class="container about-grid">
+        <div class="card" style="padding: 1.35rem;">
+          <span class="section-label">About SSB Catalyst</span>
+          <h2>We prepare candidates to understand what the board observes and how to show it naturally.</h2>
+          <p>At SSB Catalyst, training is built around behavior, not shortcuts. Our model helps aspirants understand how officers are assessed in real board situations and how to communicate confidence without sounding rehearsed.</p>
+          <p>From PPDT narration to interview expression, every module is structured for clarity, honest feedback, and practical correction. The focus remains on consistency, OLQ alignment, and confidence under pressure.</p>
+        </div>
+
+        <article class="mentor-card card">
+          <div class="avatar" aria-hidden="true">PS</div>
+          <h3>Prashant Saxena</h3>
+          <h3>Hey, I'm Prashant Saxena - a 28-time SSB repeater who earned AIR 12.</h3>
+          <p>I mentor candidates through mistakes I personally made and eventually fixed. The approach is straightforward: evaluate honestly, train specifically, and build a personality that stays natural in every SSB stage.</p>
+
+          <ul class="skills-list">
+            <li><i class="fa-solid fa-check"></i> Screening Strategies (OIR &amp; PPDT)</li>
+            <li><i class="fa-solid fa-check"></i> Psychology Tips</li>
+            <li><i class="fa-solid fa-check"></i> GTO Techniques</li>
+            <li><i class="fa-solid fa-check"></i> Repeater-Specific Guidance</li>
+            <li><i class="fa-solid fa-check"></i> Interview Hacks</li>
+          </ul>
+
+          <div class="social-row">
+            <a href="#" class="social-btn" aria-label="Telegram"><i class="fa-brands fa-telegram"></i> Telegram</a>
+            <a href="#" class="social-btn" aria-label="Instagram"><i class="fa-brands fa-instagram"></i> Instagram</a>
+            <a href="#" class="social-btn" aria-label="YouTube"><i class="fa-brands fa-youtube"></i> YouTube</a>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section id="programs" class="section">
+      <div class="container">
+        <span class="section-label">Programs &amp; Focus Areas</span>
+        <h2>Structured modules for every important stage of SSB preparation</h2>
+
+        <div class="program-grid">
+          <article class="program-card card">
+            <h3>Screening Excellence</h3>
+            <p>PPDT narration, group discussion flow, clarity of thought, observation drills.</p>
+          </article>
+          <article class="program-card card">
+            <h3>Psychology Mastery</h3>
+            <p>TAT, WAT, SRT, and SD guided through self-awareness and time discipline.</p>
+          </article>
+          <article class="program-card card">
+            <h3>GTO Performance</h3>
+            <p>Lecturette, group planning, outdoor tasks, cooperation, initiative.</p>
+          </article>
+          <article class="program-card card">
+            <h3>Personal Interview</h3>
+            <p>PIQ analysis, personal narrative, family background, current affairs.</p>
+          </article>
+          <article class="program-card card">
+            <h3>Personality Development</h3>
+            <p>Communication, confidence, discipline, grooming, OLQ alignment.</p>
+          </article>
+          <article class="program-card card">
+            <h3>Mock Assessments</h3>
+            <p>Simulated tests, individualized review, repeated corrections.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <article class="why-box card">
+          <h2>More than content. We build readiness.</h2>
+          <p>Our preparation model is OLQ-first. Instead of overwhelming aspirants with random tactics, we focus on deliberate practice, observed behavior, reflection, and confidence under real assessment conditions.</p>
+          <ul class="plain-list">
+            <li>Clear understanding of OLQs</li>
+            <li>Focused practice instead of random preparation</li>
+            <li>Actionable feedback after every mock</li>
+            <li>Premium brand look that builds trust</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <section id="results" class="section">
+      <div class="container">
+        <div class="results-head">
+          <h2>Use this section for your real numbers, selections, and student wins</h2>
+        </div>
+
+        <div class="stats-grid">
+          <div class="stat card"><strong>15</strong><span>Students guided</span></div>
+          <div class="stat card"><strong>7</strong><span>Students recommended</span></div>
+          <div class="stat card"><strong>1:1</strong><span>Personalized feedback</span></div>
+          <div class="stat card"><strong>Daily</strong><span>OLQ &amp; GTO refinement</span></div>
+        </div>
+
+        <div class="testimonial-grid">
+          <blockquote>"I stopped guessing what the board wants and learned how to present my true personality with confidence."</blockquote>
+          <blockquote>"The mock reviews were brutally honest and that changed everything in my screening and interview."</blockquote>
+          <blockquote>"The process gave me structure, calmness, and a measurable improvement in communication and OLQs."</blockquote>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <h2>Real faces, real journeys</h2>
+        <div class="stories-grid">
+          <article class="student-card card">
+            <div class="avatar">A</div>
+            <h3>Aditya</h3>
+            <div class="student-entry">NDA • Recommended</div>
+            <div class="student-year">2023 Batch</div>
+            <p class="student-testimonial">"PPDT structure and speaking under pressure became much clearer."</p>
+          </article>
+          <article class="student-card card">
+            <div class="avatar">A</div>
+            <h3>Apoorva</h3>
+            <div class="student-entry">CDS • Recommended</div>
+            <div class="student-year">2023 Batch</div>
+            <p class="student-testimonial">"I focused on OLQ alignment instead of memorizing lines."</p>
+          </article>
+          <article class="student-card card">
+            <div class="avatar">A</div>
+            <h3>Ashish</h3>
+            <div class="student-entry">NDA • Recommended</div>
+            <div class="student-year">2024 Batch</div>
+            <p class="student-testimonial">"Intense mock interviews helped me answer with confidence and logic."</p>
+          </article>
+          <article class="student-card card">
+            <div class="avatar">C</div>
+            <h3>Chitra</h3>
+            <div class="student-entry">AFCAT • Recommended</div>
+            <div class="student-year">2024 Batch</div>
+            <p class="student-testimonial">"Psychology practice felt practical and easy to improve daily."</p>
+          </article>
+          <article class="student-card card">
+            <div class="avatar">M</div>
+            <h3>Mridul</h3>
+            <div class="student-entry">CDS • Recommended</div>
+            <div class="student-year">2024 Batch</div>
+            <p class="student-testimonial">"GTO tasks with calmness was my biggest shift."</p>
+          </article>
+          <article class="student-card card">
+            <div class="avatar">P</div>
+            <h3>Parakram</h3>
+            <div class="student-entry">SSC Tech • Recommended</div>
+            <div class="student-year">2024 Batch</div>
+            <p class="student-testimonial">"Screening drills and narration practice gave me a real edge."</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="mentors" class="section">
+      <div class="container">
+        <h2>Leadership &amp; Core Team</h2>
+        <div class="mentor-grid">
+          <article class="mentor-panel card">
+            <div class="avatar">PS</div>
+            <h3>Prashant Saxena</h3>
+            <p>Founder &amp; Lead Mentor | AIR 12 | 28 Attempts</p>
+          </article>
+          <article class="mentor-panel card">
+            <div class="avatar">MD</div>
+            <h3>Manas Dwivedi</h3>
+            <p>Operations Manager</p>
+          </article>
+          <article class="mentor-panel card">
+            <div class="avatar">RP</div>
+            <h3>Raj Pandit</h3>
+            <p>Technical Manager</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <h2>A simple journey from inquiry to final readiness</h2>
+        <div class="timeline">
+          <article class="timeline-step card">
+            <h3>1. Book Counselling</h3>
+            <p>Candidate shares entry type, strengths, weak areas, timeline.</p>
+          </article>
+          <article class="timeline-step card">
+            <h3>2. Join Training</h3>
+            <p>Structured sessions for screening, psychology, GTO, interview.</p>
+          </article>
+          <article class="timeline-step card">
+            <h3>3. Practice &amp; Review</h3>
+            <p>Mock assessments and direct feedback.</p>
+          </article>
+          <article class="timeline-step card">
+            <h3>4. Face The Board</h3>
+            <p>Reach SSB with clarity, composure, and readiness.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="faq" class="section">
+      <div class="container">
+        <h2>Short, clear answers that help remove hesitation before inquiry</h2>
+
+        <div class="faq-wrap">
+          <article class="faq-item active">
+            <button class="faq-btn" type="button">Who is this coaching for?<i class="fa-solid fa-chevron-down"></i></button>
+            <div class="faq-content">
+              <p>This coaching is designed for NDA, CDS, AFCAT, TES, SSC Tech aspirants.</p>
+            </div>
+          </article>
+
+          <article class="faq-item">
+            <button class="faq-btn" type="button">Can beginners join?<i class="fa-solid fa-chevron-down"></i></button>
+            <div class="faq-content">
+              <p>Yes. The model supports both first-timers and repeaters with practical progression.</p>
+            </div>
+          </article>
+
+          <article class="faq-item">
+            <button class="faq-btn" type="button">Do you offer mock interviews and psychology guidance?<i class="fa-solid fa-chevron-down"></i></button>
+            <div class="faq-content">
+              <p>Yes. Both mock interview and psychology guidance are core parts of the training flow.</p>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact" class="section">
+      <div class="container contact-grid">
+        <article class="form-card card">
+          <h2>Student Inquiry Form</h2>
+          <p>Use the quick contact options below, or send a short message through the form.</p>
+
+          <form id="contactForm">
+            <div class="form-grid">
+              <div class="field">
+                <input type="text" name="name" placeholder="Your Name" required />
+              </div>
+              <div class="field">
+                <input type="email" name="email" placeholder="Your Email" required />
+              </div>
+              <input type="text" name="honeypot" style="display:none" tabindex="-1" autocomplete="off" aria-hidden="true" />
+              <div class="field form-full-width">
+                <textarea name="message" placeholder="Your Message"></textarea>
+              </div>
+            </div>
+
+            <div class="form-actions">
+              <button type="submit" class="btn btn-primary">Send</button>
+            </div>
+          </form>
+        </article>
+
+        <aside class="cta-banner card">
+          <div>
+            <h2>Ready to turn interest into inquiries for SSB Catalyst?</h2>
+            <p>Email: <a href="mailto:ssbcatalyst@gmail.com">ssbcatalyst@gmail.com</a></p>
+            <p>Phone: <a href="tel:+919876543210">+91 98765 43210</a></p>
+          </div>
+
+          <div class="cta-actions">
+            <a class="btn btn-primary" href="https://wa.me/919876543210" target="_blank" rel="noopener noreferrer">Chat on WhatsApp</a>
+            <a class="btn btn-outline" href="mailto:ssbcatalyst@gmail.com">Email Us</a>
+          </div>
+        </aside>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container footer-row">
+      <div class="brand">
+        <span class="brand-title">SSB CATALYST</span>
+      </div>
+      <small>&copy; 2026 SSB Catalyst. All rights reserved.</small>
+    </div>
+  </footer>
+
+  <script>
+    const menuToggle = document.getElementById("menuToggle");
+    const navLinks = document.getElementById("navLinks");
+    const menuBackdrop = document.getElementById("menuBackdrop");
+
+    const closeMobileMenu = () => {
+      navLinks.classList.remove("open");
+      menuBackdrop.classList.remove("show");
+      menuToggle.setAttribute("aria-expanded", "false");
+    };
+
+    menuToggle.addEventListener("click", () => {
+      const isOpen = navLinks.classList.toggle("open");
+      menuBackdrop.classList.toggle("show", isOpen);
+      menuToggle.setAttribute("aria-expanded", String(isOpen));
+    });
+
+    menuBackdrop.addEventListener("click", closeMobileMenu);
+
+    navLinks.querySelectorAll("a").forEach((link) => {
+      link.addEventListener("click", closeMobileMenu);
+    });
+
+    document.querySelectorAll(".faq-btn").forEach((btn) => {
+      btn.addEventListener("click", () => {
+        const item = btn.closest(".faq-item");
+        const isActive = item.classList.contains("active");
+
+        document.querySelectorAll(".faq-item").forEach((faq) => {
+          faq.classList.remove("active");
+        });
+
+        if (!isActive) {
+          item.classList.add("active");
+        }
+      });
+    });
+  </script>
+  <script id="contact-handler">
+    const form = document.getElementById("contactForm");
+
+    form.addEventListener("submit", async function (e) {
+      e.preventDefault();
+
+      const name = form.querySelector("input[name='name']").value;
+      const email = form.querySelector("input[name='email']").value;
+      const message = form.querySelector("textarea").value;
+      const honeypot = form.querySelector("input[name='honeypot']").value;
+
+      if (!name || !email) {
+        alert("Please fill all required fields");
+        return;
+      }
+
+      try {
+        const response = await fetch("http://localhost:5000/contact", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ name, email, message, honeypot }),
+        });
+
+        if (!response.ok) {
+          throw new Error("Request failed");
+        }
+
+        alert("Message sent successfully ✅");
+        form.reset();
+      } catch (error) {
+        alert("Something went wrong ❌");
+      }
+    });
+  </script>
+</body>
+</html>
