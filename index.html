@@ -3,27 +3,62 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>SSB Catalyst</title>
+  <title>SSB Catalyst — Clarity. Confidence. Recommendation.</title>
+  <meta name="description" content="SSB Catalyst is India's premier SSB coaching platform. Practice PPDT, TAT, WAT, SRT, SD and connect with expert mentors." />
+  <meta property="og:title" content="SSB Catalyst — Clarity. Confidence. Recommendation." />
+  <meta property="og:description" content="SSB Catalyst is India's premier SSB coaching platform. Practice PPDT, TAT, WAT, SRT, SD and connect with expert mentors." />
+  <meta property="og:image" content="./assets/og-image.svg" />
+  <meta property="og:type" content="website" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Playfair+Display:wght@600;700;800&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWix+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkR4j8a+I1Q1pUCe5xk2f9fR7u7fX8n2c4Vg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400&family=Playfair+Display:wght@500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <script>
+    // Initialize theme before page renders to prevent flash
+    const theme = localStorage.getItem('theme') || 'light';
+    document.documentElement.setAttribute('data-theme', theme);
+  </script>
   <style>
     :root {
-      --bg-main: #f5f1e8;
-      --text-main: #1a1a1a;
-      --accent: #4b5d3a;
-      --muted: #6b6b6b;
-      --border-soft: rgba(26, 26, 26, 0.06);
-      --border-hover: rgba(26, 26, 26, 0.12);
-      --meta-60: rgba(26, 26, 26, 0.6);
-      --secondary-75: rgba(26, 26, 26, 0.75);
-      --nav-80: rgba(26, 26, 26, 0.8);
-      --overlay: rgba(0, 0, 0, 0.4);
-      --button-on-accent: #ffffff;
-      --line-accent: rgba(75, 93, 58, 0.45);
-      --radius: 12px;
+      --bg-main: #faf8f5;
+      --text-main: #1a1a2e;
+      --accent: #8b7355;
+      --muted: #6b6560;
+      --border-soft: #e8e0d5;
+      --border-hover: #d9d2c8;
+      --meta-60: #6b6560;
+      --secondary-75: #6b6560;
+      --nav-80: #1a1a2e;
+      --overlay: rgba(26, 26, 46, 0.28);
+      --button-on-accent: #faf8f5;
+      --line-accent: #8b7355;
+      --radius: 8px;
       --container: 1100px;
+      color-scheme: light;
+    }
+
+    [data-theme="dark"] {
+      --bg-main: #0f0f1e;
+      --text-main: #e8e8f5;
+      --accent: #a89070;
+      --muted: #9e9899;
+      --border-soft: #2a2530;
+      --border-hover: #3d3843;
+      --meta-60: #9e9899;
+      --secondary-75: #9e9899;
+      --nav-80: #e8e8f5;
+      --overlay: rgba(26, 26, 46, 0.5);
+      --button-on-accent: #0f0f1e;
+      --line-accent: #a89070;
+      color-scheme: dark;
+    }
+
+    [data-theme="dark"] .section {
+      background: #0f0f1e;
+    }
+
+    [data-theme="dark"] .section:nth-of-type(even) {
+      background: #1a1825;
     }
 
     * {
@@ -36,11 +71,12 @@
 
     body {
       margin: 0;
-      font-family: "Inter", sans-serif;
+      font-family: "DM Sans", sans-serif;
       color: var(--text-main);
       background-color: var(--bg-main);
-      line-height: 1.6;
+      line-height: 1.75;
       position: relative;
+      font-weight: 400;
     }
 
     body::before {
@@ -48,11 +84,8 @@
       position: fixed;
       inset: 0;
       pointer-events: none;
-      background-image:
-        linear-gradient(rgba(26, 26, 26, 0.03) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(26, 26, 26, 0.03) 1px, transparent 1px);
-      background-size: 36px 36px;
-      opacity: 0.3;
+      background-image: none;
+      opacity: 1;
       z-index: -1;
     }
 
@@ -66,6 +99,35 @@
       text-decoration: none;
     }
 
+    .email-link {
+      color: #8b7355;
+      text-decoration: none;
+      cursor: pointer;
+    }
+
+    .email-link:hover {
+      text-decoration: underline;
+    }
+
+    .phone-link {
+      color: inherit;
+      text-decoration: none;
+      cursor: pointer;
+    }
+
+    .phone-link:hover {
+      text-decoration: none;
+    }
+
+    a:focus-visible,
+    button:focus-visible,
+    input:focus-visible,
+    textarea:focus-visible,
+    select:focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 2px;
+    }
+
     .container {
       width: 100%;
       max-width: 100%;
@@ -76,23 +138,29 @@
       width: 100%;
       padding: 96px 20px;
       border-top: 1px solid var(--border-soft);
+      background: var(--bg-main);
+    }
+
+    .section:nth-of-type(even) {
+      background: #f4f0eb;
     }
 
     .section-label {
       font-size: 0.85rem;
       text-transform: uppercase;
-      letter-spacing: 0.16em;
+      letter-spacing: 0.08em;
       color: var(--meta-60);
       margin-bottom: 12px;
       display: inline-block;
       font-weight: 600;
     }
 
-    h1, h2, h3 {
+    h1, h2, h3, h4 {
       margin: 0 0 16px;
       line-height: 1.2;
       font-family: "Playfair Display", serif;
       color: var(--text-main);
+      font-weight: 600;
     }
 
     h1 {
@@ -120,12 +188,13 @@
       justify-content: center;
       gap: 0.5rem;
       padding: 0.78rem 1.15rem;
-      border-radius: 10px;
+      border-radius: 4px;
       border: 1px solid transparent;
-      font-weight: 600;
+      font-weight: 400;
       cursor: pointer;
       transition: opacity 0.2s ease, border-color 0.2s ease, background-color 0.2s ease;
       font-size: 0.94rem;
+      font-family: "DM Sans", sans-serif;
     }
 
     .btn:hover {
@@ -133,37 +202,38 @@
     }
 
     .btn-primary {
-      background: var(--accent);
+      background: var(--text-main);
       color: var(--button-on-accent);
-      border-color: var(--accent);
+      border-color: var(--text-main);
     }
 
     .btn-primary:hover {
-      border-color: rgba(75, 93, 58, 0.85);
+      background: var(--accent);
+      border-color: var(--accent);
     }
 
     .btn-outline {
-      border-color: var(--border-soft);
+      border-color: var(--text-main);
       color: var(--text-main);
       background: transparent;
     }
 
     .btn-outline:hover {
-      border-color: var(--border-hover);
-      background: rgba(26, 26, 26, 0.03);
+      border-color: var(--text-main);
+      background: transparent;
     }
 
     .card {
-      background: transparent;
-      border: 1px solid var(--border-soft);
+      background: #f4f0eb;
+      border: 0.5px solid #d9d2c8;
       border-radius: var(--radius);
-      box-shadow: none;
+      box-shadow: 0 1px 4px rgba(26, 26, 46, 0.06);
       transition: border-color 0.2s ease, background-color 0.2s ease;
     }
 
     .card:hover {
       border-color: var(--border-hover);
-      background: rgba(255, 255, 255, 0.18);
+      background: #ffffff;
     }
 
     .topbar-wrap {
@@ -171,8 +241,8 @@
       top: 0;
       z-index: 1000;
       width: 100%;
-      backdrop-filter: blur(4px);
-      background: rgba(245, 241, 232, 0.9);
+      backdrop-filter: none;
+      background: #faf8f5;
       border-bottom: 1px solid var(--border-soft);
     }
 
@@ -196,8 +266,8 @@
 
     .brand-title {
       font-family: "Playfair Display", serif;
-      font-weight: 800;
-      letter-spacing: 0.12em;
+      font-weight: 600;
+      letter-spacing: 0.08em;
       font-size: 1.05rem;
     }
 
@@ -211,9 +281,9 @@
       display: none;
       width: 42px;
       height: 42px;
-      border-radius: 10px;
-      background: rgba(26, 26, 26, 0.03);
-      border: 1px solid var(--border-soft);
+      border-radius: 4px;
+      background: #f4f0eb;
+      border: 1px solid #d9d2c8;
       color: var(--text-main);
       cursor: pointer;
     }
@@ -229,9 +299,10 @@
 
     .nav-links a {
       color: var(--nav-80);
-      font-weight: 500;
+      font-weight: 400;
       font-size: 0.95rem;
       position: relative;
+      font-family: "DM Sans", sans-serif;
     }
 
     .nav-links a::after {
@@ -276,7 +347,7 @@
     .hero-tagline {
       color: var(--meta-60);
       text-transform: uppercase;
-      letter-spacing: 0.12em;
+      letter-spacing: 0.08em;
       font-size: 0.78rem;
       font-weight: 700;
       margin-bottom: 12px;
@@ -318,13 +389,15 @@
       display: inline-flex;
       align-items: center;
       gap: 0.45rem;
-      background: rgba(75, 93, 58, 0.08);
+      background: #e8e0d5;
       color: var(--accent);
-      border: 1px solid var(--line-accent);
+      border: 1px solid #d9d2c8;
       padding: 0.55rem 0.9rem;
       border-radius: 999px;
       font-weight: 600;
       margin-bottom: 1rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
     }
 
     .steps {
@@ -334,14 +407,14 @@
     }
 
     .step {
-      border: 1px solid var(--border-soft);
+      border: 0.5px solid #d9d2c8;
       border-radius: 12px;
       padding: 0.9rem;
       display: grid;
       grid-template-columns: auto 1fr;
       gap: 0.8rem;
       align-items: center;
-      background: rgba(255, 255, 255, 0.2);
+      background: #f4f0eb;
     }
 
     .step-number {
@@ -372,8 +445,8 @@
     .pill {
       padding: 0.85rem 0.95rem;
       border-radius: 12px;
-      border: 1px solid var(--border-soft);
-      background: rgba(255, 255, 255, 0.2);
+      border: 0.5px solid #d9d2c8;
+      background: #f4f0eb;
       color: var(--secondary-75);
       font-size: 0.93rem;
     }
@@ -394,7 +467,7 @@
       height: 88px;
       border-radius: 999px;
       border: 1px solid var(--line-accent);
-      background: rgba(75, 93, 58, 0.1);
+      background: rgba(139, 115, 85, 0.12);
       display: grid;
       place-items: center;
       font-weight: 700;
@@ -429,7 +502,7 @@
     }
 
     .social-btn {
-      border: 1px solid var(--border-soft);
+      border: 1px solid #d9d2c8;
       background: transparent;
       color: var(--secondary-75);
       padding: 0.52rem 0.78rem;
@@ -444,7 +517,7 @@
     .social-btn:hover {
       border-color: var(--accent);
       color: var(--accent);
-      background: rgba(75, 93, 58, 0.08);
+      background: rgba(139, 115, 85, 0.1);
     }
 
     .program-grid,
@@ -483,6 +556,177 @@
       margin-bottom: 0.4rem;
     }
 
+    .practice-tests-shell {
+      display: grid;
+      gap: 1.1rem;
+      justify-items: center;
+    }
+
+    .practice-tests-intro {
+      width: 100%;
+      max-width: 860px;
+      text-align: left;
+    }
+
+    .practice-tests-intro .practice-tests-label {
+      display: inline-block;
+      margin-bottom: 10px;
+      color: #8b7355;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      line-height: 1;
+      text-transform: uppercase;
+    }
+
+    .practice-tests-intro h2 {
+      margin-bottom: 10px;
+    }
+
+    .practice-tests-intro p {
+      max-width: 62ch;
+      color: #6b6560;
+    }
+
+    .practice-tests-card {
+      display: flex;
+      width: 100%;
+      max-width: 860px;
+      margin: 0 auto;
+      overflow: hidden;
+      border: 0.5px solid #d9d2c8;
+      border-radius: 8px;
+      background: #ffffff;
+    }
+
+    .practice-tests-list {
+      flex: 0 0 200px;
+      width: 200px;
+      display: flex;
+      flex-direction: column;
+      background: #f4f0eb;
+      border-right: 0.5px solid #d9d2c8;
+    }
+
+    .practice-test-item {
+      position: relative;
+      width: 100%;
+      padding: 13px 18px 13px 34px;
+      border: 0;
+      border-bottom: 0.5px solid #d9d2c8;
+      background: transparent;
+      color: #6b6560;
+      cursor: pointer;
+      font: inherit;
+      font-size: 12px;
+      text-align: left;
+      transition: background-color 0.2s ease, color 0.2s ease;
+    }
+
+    .practice-test-item::before {
+      content: "";
+      position: absolute;
+      left: 18px;
+      top: 50%;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: #8b7355;
+      transform: translateY(-50%);
+      transition: background-color 0.2s ease;
+    }
+
+    .practice-test-item:hover {
+      background: #e8e0d5;
+    }
+
+    .practice-test-item.active {
+      background: #1a1a2e;
+      color: #faf8f5;
+    }
+
+    .practice-test-item.active::before {
+      background: #faf8f5;
+    }
+
+    .practice-test-item:last-child {
+      border-bottom: none;
+    }
+
+    .practice-tests-detail {
+      flex: 1;
+      display: grid;
+      align-content: start;
+      gap: 0.9rem;
+      padding: 24px 28px;
+      background: #ffffff;
+    }
+
+    .practice-tests-tag {
+      color: #8b7355;
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    .practice-tests-title {
+      margin: 0;
+      color: #1a1a2e;
+      font-family: "Playfair Display", serif;
+      font-size: 18px;
+      line-height: 1.25;
+    }
+
+    .practice-tests-description {
+      margin: 0;
+      color: #6b6560;
+      font-size: 13px;
+      line-height: 1.65;
+    }
+
+    .practice-tests-stats {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 0.85rem;
+      max-width: 320px;
+    }
+
+    .practice-tests-stat {
+      display: grid;
+      gap: 0.15rem;
+      align-content: start;
+    }
+
+    .practice-tests-stat strong {
+      color: #1a1a2e;
+      font-family: "DM Sans", sans-serif;
+      font-size: 22px;
+      font-weight: 500;
+      line-height: 1;
+    }
+
+    .practice-tests-stat span {
+      color: #8b7355;
+      font-size: 10px;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    .practice-tests-cta {
+      justify-self: start;
+      padding: 7px 18px;
+      border-radius: 3px;
+      font-size: 0.88rem;
+    }
+
+    .practice-tests-cta:hover {
+      background: #8b7355;
+      border-color: #8b7355;
+      color: #faf8f5;
+      opacity: 1;
+    }
+
     .results-head {
       margin-bottom: 1rem;
     }
@@ -514,7 +758,7 @@
       padding: 1.05rem;
       border-left: 3px solid var(--accent);
       border-radius: 12px;
-      background: rgba(255, 255, 255, 0.2);
+      background: #f4f0eb;
       color: var(--secondary-75);
       font-style: italic;
     }
@@ -554,7 +798,7 @@
       font-weight: 700;
       text-transform: uppercase;
       margin: 0.4rem 0;
-      letter-spacing: 0.05em;
+      letter-spacing: 0.08em;
     }
 
     .student-year {
@@ -593,7 +837,7 @@
       left: 0;
       width: 100%;
       height: 3px;
-      background: linear-gradient(90deg, var(--line-accent), transparent);
+      background: var(--accent);
     }
 
     .faq-wrap {
@@ -603,9 +847,9 @@
     }
 
     .faq-item {
-      border: 1px solid var(--border-soft);
+      border: 0.5px solid #d9d2c8;
       border-radius: 12px;
-      background: rgba(255, 255, 255, 0.16);
+      background: #f4f0eb;
       overflow: hidden;
     }
 
@@ -676,10 +920,10 @@
     input,
     select,
     textarea {
-      background: rgba(255, 255, 255, 0.32);
-      border: 1px solid var(--border-soft);
+      background: #ffffff;
+      border: 1px solid #d9d2c8;
       color: var(--text-main);
-      border-radius: 10px;
+      border-radius: 4px;
       padding: 0.66rem 0.7rem;
       font: inherit;
     }
@@ -687,7 +931,7 @@
     input:focus,
     select:focus,
     textarea:focus {
-      outline: 2px solid rgba(75, 93, 58, 0.2);
+      outline: 2px solid rgba(139, 115, 85, 0.25);
       border-color: var(--accent);
     }
 
@@ -794,7 +1038,7 @@
         top: 74px;
         right: 1rem;
         left: 1rem;
-        background: rgba(245, 241, 232, 0.98);
+        background: #faf8f5;
         border: 1px solid var(--border-soft);
         border-radius: 12px;
         padding: 0.7rem;
@@ -833,6 +1077,46 @@
         grid-template-columns: 1fr;
       }
 
+      .practice-tests-card {
+        flex-direction: column;
+      }
+
+      .practice-tests-list {
+        width: 100%;
+        flex: 0 0 auto;
+        flex-direction: row;
+        overflow-x: auto;
+        border-right: none;
+        border-bottom: 0.5px solid #d9d2c8;
+        scrollbar-width: none;
+        -ms-overflow-style: none;
+      }
+
+      .practice-tests-list::-webkit-scrollbar {
+        display: none;
+      }
+
+      .practice-test-item {
+        flex: 0 0 auto;
+        min-width: 132px;
+        border-bottom: none;
+        border-right: 0.5px solid #d9d2c8;
+        white-space: nowrap;
+        padding: 12px 16px 12px 30px;
+      }
+
+      .practice-test-item:last-child {
+        border-right: none;
+      }
+
+      .practice-tests-detail {
+        padding: 20px;
+      }
+
+      .practice-tests-stats {
+        max-width: none;
+      }
+
       .section {
         padding: 64px 20px;
       }
@@ -845,13 +1129,35 @@
     .accent-word {
       color: var(--accent);
     }
+
+    .nav-links a.active::after,
+    .nav-links a[aria-current="page"]::after {
+      width: 100%;
+      height: 2px;
+      background: var(--accent);
+    }
+
+    .section h2 {
+      position: relative;
+      padding-top: 12px;
+    }
+
+    .section h2::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 30px;
+      height: 2px;
+      background: var(--accent);
+    }
   </style>
 </head>
-<body>
+<body id="top">
   <div class="menu-backdrop" id="menuBackdrop" aria-hidden="true"></div>
   <div class="topbar-wrap">
     <nav class="navbar">
-      <a href="#" class="brand" aria-label="SSB Catalyst Home">
+      <a href="#top" class="brand" aria-label="SSB Catalyst Home">
         <span class="brand-title">SSB CATALYST</span>
         <span class="brand-tagline">Clarity. Confidence. Recommendation.</span>
       </a>
@@ -867,6 +1173,7 @@
         <li><a href="#mentors">Mentors</a></li>
         <li><a href="#faq">FAQ</a></li>
         <li><a href="#contact" class="btn btn-primary">Book Demo</a></li>
+        <li><button id="themeToggle" aria-label="Toggle light and dark theme" class="btn btn-outline" style="border: 1px solid var(--text-main); cursor: pointer;"><i class="fas fa-moon"></i></button></li>
       </ul>
     </nav>
   </div>
@@ -944,9 +1251,9 @@
           </ul>
 
           <div class="social-row">
-            <a href="#" class="social-btn" aria-label="Telegram"><i class="fa-brands fa-telegram"></i> Telegram</a>
-            <a href="#" class="social-btn" aria-label="Instagram"><i class="fa-brands fa-instagram"></i> Instagram</a>
-            <a href="#" class="social-btn" aria-label="YouTube"><i class="fa-brands fa-youtube"></i> YouTube</a>
+            <a href="https://t.me/ssbcatalyst" target="_blank" rel="noopener noreferrer" class="social-btn" aria-label="Telegram"><i class="fa-brands fa-telegram"></i> Telegram</a>
+            <a href="https://www.instagram.com/ssbcatalyst?igsh=MTNjY3JqcmgyNTJwOQ==" target="_blank" class="social-btn" aria-label="Instagram"><i class="fa-brands fa-instagram"></i> Instagram</a>
+            <a href="https://www.youtube.com/@ssbcatalyst" target="_blank" rel="noopener noreferrer" class="social-btn" aria-label="YouTube"><i class="fa-brands fa-youtube"></i> YouTube</a>
           </div>
         </article>
       </div>
@@ -998,6 +1305,45 @@
             <li>Premium brand look that builds trust</li>
           </ul>
         </article>
+      </div>
+    </section>
+
+    <section id="practice-tests" class="section practice-tests-section">
+      <div class="container practice-tests-shell">
+        <div class="practice-tests-intro">
+          <span class="practice-tests-label">Practice Tests</span>
+          <h2>Prepare Like a Soldier</h2>
+          <p>Five core SSB psychological tests — practice at your own pace.</p>
+        </div>
+
+        <div class="practice-tests-card" aria-label="SSB practice tests">
+          <div class="practice-tests-list" role="tablist" aria-label="Practice test list">
+            <button type="button" class="practice-test-item active" data-test="ppdt" aria-selected="true">PPDT</button>
+            <button type="button" class="practice-test-item" data-test="tat" aria-selected="false">TAT</button>
+            <button type="button" class="practice-test-item" data-test="wat" aria-selected="false">WAT</button>
+            <button type="button" class="practice-test-item" data-test="srt" aria-selected="false">SRT</button>
+            <button type="button" class="practice-test-item" data-test="sd" aria-selected="false">SD Practice</button>
+          </div>
+
+          <div class="practice-tests-detail">
+            <div class="practice-tests-tag" id="practiceTestTag">Psychological Test</div>
+            <h3 class="practice-tests-title" id="practiceTestTitle">Picture Perception &amp; Description Test</h3>
+            <p class="practice-tests-description" id="practiceTestDescription">View a hazy image for 30 seconds, write a short story, then narrate it in a group. Tests imagination, leadership cues, and positive thinking.</p>
+
+            <div class="practice-tests-stats">
+              <div class="practice-tests-stat">
+                <strong id="practiceTestStatOneValue">12</strong>
+                <span id="practiceTestStatOneLabel">Practice Sets</span>
+              </div>
+              <div class="practice-tests-stat">
+                <strong id="practiceTestStatTwoValue">30s</strong>
+                <span id="practiceTestStatTwoLabel">Image Time</span>
+              </div>
+            </div>
+
+            <a href="#contact" class="btn btn-primary practice-tests-cta" id="practiceTestCta">Begin Test →</a>
+          </div>
+        </div>
       </div>
     </section>
 
@@ -1074,23 +1420,14 @@
 
     <section id="mentors" class="section">
       <div class="container">
-        <h2>Leadership &amp; Core Team</h2>
+        <h2>Leadership </h2>
         <div class="mentor-grid">
           <article class="mentor-panel card">
             <div class="avatar">PS</div>
             <h3>Prashant Saxena</h3>
             <p>Founder &amp; Lead Mentor | AIR 12 | 28 Attempts</p>
           </article>
-          <article class="mentor-panel card">
-            <div class="avatar">MD</div>
-            <h3>Manas Dwivedi</h3>
-            <p>Operations Manager</p>
-          </article>
-          <article class="mentor-panel card">
-            <div class="avatar">RP</div>
-            <h3>Raj Pandit</h3>
-            <p>Technical Manager</p>
-          </article>
+
         </div>
       </div>
     </section>
@@ -1153,23 +1490,27 @@
         <article class="form-card card">
           <h2>Student Inquiry Form</h2>
           <p>Use the quick contact options below, or send a short message through the form.</p>
+          <div id="formMessage" style="display: none; padding: 1rem; border-radius: 8px; margin-bottom: 1rem;" role="alert"></div>
 
           <form id="contactForm">
             <div class="form-grid">
               <div class="field">
-                <input type="text" name="name" placeholder="Your Name" required />
+                <input type="text" name="name" aria-label="Your Name" placeholder="Your Name" required />
               </div>
               <div class="field">
-                <input type="email" name="email" placeholder="Your Email" required />
+                <input type="email" name="email" aria-label="Your Email" placeholder="Your Email" required />
+              </div>
+              <div class="field">
+                <input type="tel" name="phone" aria-label="Your Phone Number" placeholder="Your Phone Number" />
               </div>
               <input type="text" name="honeypot" style="display:none" tabindex="-1" autocomplete="off" aria-hidden="true" />
               <div class="field form-full-width">
-                <textarea name="message" placeholder="Your Message"></textarea>
+                <textarea name="message" aria-label="Your Message" placeholder="Your Message"></textarea>
               </div>
             </div>
 
             <div class="form-actions">
-              <button type="submit" class="btn btn-primary">Send</button>
+              <button type="submit" class="btn btn-primary" id="submitBtn">Send Inquiry</button>
             </div>
           </form>
         </article>
@@ -1177,13 +1518,13 @@
         <aside class="cta-banner card">
           <div>
             <h2>Ready to turn interest into inquiries for SSB Catalyst?</h2>
-            <p>Email: <a href="mailto:ssbcatalyst@gmail.com">ssbcatalyst@gmail.com</a></p>
-            <p>Phone: <a href="tel:+919876543210">+91 98765 43210</a></p>
+            <p>Email: <a class="email-link" href="mailto:ssbcatalyst@gmail.com" title="Send email">ssbcatalyst@gmail.com</a></p>
+            <p>Phone: <a class="phone-link" href="tel:+919711414096" title="Call us">9711414096</a></p>
           </div>
 
           <div class="cta-actions">
-            <a class="btn btn-primary" href="https://wa.me/919876543210" target="_blank" rel="noopener noreferrer">Chat on WhatsApp</a>
-            <a class="btn btn-outline" href="mailto:ssbcatalyst@gmail.com">Email Us</a>
+            <a class="btn btn-primary" href="https://wa.me/919711414096?text=Hello%2C%20I%20want%20to%20know%20more%20about%20SSB%20Catalyst" target="_blank" rel="noopener noreferrer" title="Chat on WhatsApp"><i class="fab fa-whatsapp"></i> WhatsApp</a>
+            <a class="btn btn-outline" href="./admin/dashboard.html" title="Admin Dashboard"><i class="fas fa-lock"></i> Admin</a>
           </div>
         </aside>
       </div>
@@ -1200,78 +1541,96 @@
   </footer>
 
   <script>
-    const menuToggle = document.getElementById("menuToggle");
-    const navLinks = document.getElementById("navLinks");
-    const menuBackdrop = document.getElementById("menuBackdrop");
-
-    const closeMobileMenu = () => {
-      navLinks.classList.remove("open");
-      menuBackdrop.classList.remove("show");
-      menuToggle.setAttribute("aria-expanded", "false");
+    const practiceTestData = {
+      ppdt: {
+        tag: "Psychological Test",
+        title: "Picture Perception & Description Test",
+        description: "View a hazy image for 30 seconds, write a short story, then narrate it in a group. Tests imagination, leadership cues, and positive thinking.",
+        stats: [
+          { value: "12", label: "Practice Sets" },
+          { value: "30s", label: "Image Time" }
+        ]
+      },
+      tat: {
+        tag: "Psychological Test",
+        title: "Thematic Apperception Test",
+        description: "Write a meaningful story from a picture prompt. Reveals personality traits, motivation patterns, and social perception under assessment.",
+        stats: [
+          { value: "20", label: "Practice Sets" },
+          { value: "4 min", label: "Per Story" }
+        ]
+      },
+      wat: {
+        tag: "Written Test",
+        title: "Word Association Test",
+        description: "60 words shown one by one — write the first sentence that comes to mind. Timed strictly at 15 seconds per word.",
+        stats: [
+          { value: "60", label: "Words" },
+          { value: "15s", label: "Per Word" }
+        ]
+      },
+      srt: {
+        tag: "Situational Test",
+        title: "Situation Reaction Test",
+        description: "React to 60 real-life situations in writing. Tests practical intelligence, emotional balance, and officer-like qualities.",
+        stats: [
+          { value: "60", label: "Situations" },
+          { value: "30 min", label: "Total" }
+        ]
+      },
+      sd: {
+        tag: "Self Assessment",
+        title: "Self Description Practice",
+        description: "Write what your parents, friends, teachers, and you think about yourself. Guided prompts build an authentic, consistent self-description.",
+        stats: [
+          { value: "5", label: "Perspectives" },
+          { value: "Guided", label: "Format" }
+        ]
+      }
     };
 
-    menuToggle.addEventListener("click", () => {
-      const isOpen = navLinks.classList.toggle("open");
-      menuBackdrop.classList.toggle("show", isOpen);
-      menuToggle.setAttribute("aria-expanded", String(isOpen));
-    });
+    const practicePanel = {
+      tag: document.getElementById("practiceTestTag"),
+      title: document.getElementById("practiceTestTitle"),
+      description: document.getElementById("practiceTestDescription"),
+      statOneValue: document.getElementById("practiceTestStatOneValue"),
+      statOneLabel: document.getElementById("practiceTestStatOneLabel"),
+      statTwoValue: document.getElementById("practiceTestStatTwoValue"),
+      statTwoLabel: document.getElementById("practiceTestStatTwoLabel"),
+      buttons: Array.from(document.querySelectorAll(".practice-test-item"))
+    };
 
-    menuBackdrop.addEventListener("click", closeMobileMenu);
+    function setPracticeTest(testKey) {
+      const selected = practiceTestData[testKey] || practiceTestData.ppdt;
 
-    navLinks.querySelectorAll("a").forEach((link) => {
-      link.addEventListener("click", closeMobileMenu);
-    });
+      practicePanel.tag.textContent = selected.tag;
+      practicePanel.title.textContent = selected.title;
+      practicePanel.description.textContent = selected.description;
+      practicePanel.statOneValue.textContent = selected.stats[0].value;
+      practicePanel.statOneLabel.textContent = selected.stats[0].label;
+      practicePanel.statTwoValue.textContent = selected.stats[1].value;
+      practicePanel.statTwoLabel.textContent = selected.stats[1].label;
 
-    document.querySelectorAll(".faq-btn").forEach((btn) => {
-      btn.addEventListener("click", () => {
-        const item = btn.closest(".faq-item");
-        const isActive = item.classList.contains("active");
-
-        document.querySelectorAll(".faq-item").forEach((faq) => {
-          faq.classList.remove("active");
-        });
-
-        if (!isActive) {
-          item.classList.add("active");
-        }
+      practicePanel.buttons.forEach((button) => {
+        const isActive = button.dataset.test === testKey;
+        button.classList.toggle("active", isActive);
+        button.setAttribute("aria-selected", String(isActive));
       });
+    }
+
+    practicePanel.buttons.forEach((button) => {
+      button.addEventListener("click", () => setPracticeTest(button.dataset.test));
     });
+
+    setPracticeTest("ppdt");
   </script>
-  <script id="contact-handler">
-    const form = document.getElementById("contactForm");
-
-    form.addEventListener("submit", async function (e) {
-      e.preventDefault();
-
-      const name = form.querySelector("input[name='name']").value;
-      const email = form.querySelector("input[name='email']").value;
-      const message = form.querySelector("textarea").value;
-      const honeypot = form.querySelector("input[name='honeypot']").value;
-
-      if (!name || !email) {
-        alert("Please fill all required fields");
-        return;
-      }
-
-      try {
-        const response = await fetch("http://localhost:5000/contact", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ name, email, message, honeypot }),
-        });
-
-        if (!response.ok) {
-          throw new Error("Request failed");
-        }
-
-        alert("Message sent successfully ✅");
-        form.reset();
-      } catch (error) {
-        alert("Something went wrong ❌");
-      }
-    });
+  <script>
+    window.EMAILJS_SERVICE_ID = "YOUR_SERVICE_ID";
+    window.EMAILJS_TEMPLATE_ID = "YOUR_TEMPLATE_ID";
+    window.EMAILJS_PUBLIC_KEY = "YOUR_PUBLIC_KEY";
   </script>
+  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+  <script src="./js/main.js" defer></script>
 </body>
 </html>
+
