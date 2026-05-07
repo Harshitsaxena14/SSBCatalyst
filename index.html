@@ -9,54 +9,62 @@
   <meta property="og:description" content="SSB Catalyst is India's premier SSB coaching platform. Practice PPDT, TAT, WAT, SRT, SD and connect with expert mentors." />
   <meta property="og:image" content="./assets/og-image.svg" />
   <meta property="og:type" content="website" />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400&family=Playfair+Display:wght@500;600&display=swap" rel="stylesheet" />
+  <meta name="theme-color" content="#f8fafc" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
   <script>
-    // Initialize theme before page renders to prevent flash
-    const theme = localStorage.getItem('theme') || 'light';
-    document.documentElement.setAttribute('data-theme', theme);
+    (function () {
+      const savedTheme = localStorage.getItem('ssb-theme');
+      if (savedTheme === 'dark') {
+        document.documentElement.setAttribute('data-theme', 'dark');
+      } else {
+        document.documentElement.removeAttribute('data-theme');
+      }
+    }());
   </script>
   <style>
-:root {
-      --bg-main: #F5F5F5;
-      --text-main: #0F1720;
-      --accent: #C8A96B;
-      --muted: rgba(15, 23, 32, 0.72);
-      --border-soft: rgba(15, 23, 32, 0.08);
-      --border-hover: rgba(200, 169, 107, 0.28);
-      --meta-60: rgba(15, 23, 32, 0.72);
-      --secondary-75: rgba(15, 23, 32, 0.72);
-      --nav-80: rgba(15, 23, 32, 0.86);
-      --overlay: rgba(15, 23, 32, 0.28);
-      --button-on-accent: #F5F5F5;
-      --line-accent: #C8A96B;
-      --radius: 10px;
-      --container: 1100px;
+    :root {
+      --bg: #f8fafc;
+      --bg2: #f1f5f9;
+      --bg3: #e2e8f0;
+      --surface: #ffffff;
+      --text: #0f172a;
+      --text2: #475569;
+      --text3: #94a3b8;
+      --accent: #0ea5e9;
+      --accent2: #38bdf8;
+      --accentbg: #e0f2fe;
+      --accenttext: #0369a1;
+      --border: rgba(15, 23, 42, 0.1);
+      --navbg: rgba(248, 250, 252, 0.95);
+      --successbg: rgba(16, 185, 129, 0.12);
+      --successtext: #047857;
+      --successborder: rgba(16, 185, 129, 0.28);
+      --focus: rgba(14, 165, 233, 0.24);
+      --radius-sm: 8px;
+      --radius-md: 12px;
+      --radius-lg: 14px;
       color-scheme: light;
     }
 
     [data-theme="dark"] {
-      --bg-main: #0F1720;
-      --text-main: #F5F5F5;
-      --muted: rgba(255, 255, 255, 0.72);
-      --border-soft: rgba(255, 255, 255, 0.08);
-      --border-hover: rgba(200, 169, 107, 0.28);
-      --meta-60: rgba(255, 255, 255, 0.72);
-      --secondary-75: rgba(255, 255, 255, 0.72);
-      --nav-80: rgba(255, 255, 255, 0.86);
-      --overlay: rgba(15, 23, 32, 0.55);
-      --button-on-accent: #0F1720;
+      --bg: #0a0f1a;
+      --bg2: #0f172a;
+      --bg3: #1e293b;
+      --surface: #0f172a;
+      --text: #e2e8f0;
+      --text2: #94a3b8;
+      --text3: #475569;
+      --accent: #38bdf8;
+      --accent2: #7dd3fc;
+      --accentbg: rgba(56, 189, 248, 0.10);
+      --accenttext: #38bdf8;
+      --border: rgba(226, 232, 240, 0.08);
+      --navbg: rgba(10, 15, 26, 0.95);
+      --successbg: rgba(16, 185, 129, 0.10);
+      --successtext: #34d399;
+      --successborder: rgba(16, 185, 129, 0.20);
+      --focus: rgba(125, 211, 252, 0.24);
       color-scheme: dark;
-    }
-
-    [data-theme="dark"] .section {
-      background: #0f0f1e;
-    }
-
-    [data-theme="dark"] .section:nth-of-type(even) {
-      background: #1a1825;
     }
 
     * {
@@ -69,27 +77,16 @@
 
     body {
       margin: 0;
-      font-family: "DM Sans", sans-serif;
-      color: var(--text-main);
-      background-color: var(--bg-main);
-      line-height: 1.75;
-      position: relative;
-      font-weight: 400;
-    }
-
-    body::before {
-      content: "";
-      position: fixed;
-      inset: 0;
-      pointer-events: none;
-      background-image: none;
-      opacity: 1;
-      z-index: -1;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.7;
+      transition: background-color 0.25s ease, color 0.25s ease;
     }
 
     img {
-      max-width: 100%;
       display: block;
+      max-width: 100%;
     }
 
     a {
@@ -97,24 +94,15 @@
       text-decoration: none;
     }
 
-    .email-link {
-      color: #8b7355;
-      text-decoration: none;
-      cursor: pointer;
+    button,
+    input,
+    textarea,
+    select {
+      font: inherit;
     }
 
-    .email-link:hover {
-      text-decoration: underline;
-    }
-
-    .phone-link {
+    button {
       color: inherit;
-      text-decoration: none;
-      cursor: pointer;
-    }
-
-    .phone-link:hover {
-      text-decoration: none;
     }
 
     a:focus-visible,
@@ -127,1140 +115,1358 @@
     }
 
     .container {
-      width: 100%;
-      max-width: 100%;
+      width: min(1200px, calc(100% - 32px));
       margin: 0 auto;
     }
 
-    .section {
-      width: 100%;
-      padding: 96px 20px;
-      border-top: 1px solid var(--border-soft);
-      background: var(--bg-main);
-    }
-
-    .section:nth-of-type(even) {
-      background: #f4f0eb;
-    }
-
-    .section-label {
-      font-size: 0.85rem;
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-      color: var(--meta-60);
-      margin-bottom: 12px;
-      display: inline-block;
-      font-weight: 600;
-    }
-
-    h1, h2, h3, h4 {
-      margin: 0 0 16px;
-      line-height: 1.2;
-      font-family: "Playfair Display", serif;
-      color: var(--text-main);
-      font-weight: 600;
-    }
-
-    h1 {
-      font-size: clamp(2rem, 4.1vw, 4rem);
-      letter-spacing: 0.01em;
-      line-height: 1.1;
-    }
-
-    h2 {
-      font-size: clamp(1.55rem, 3vw, 2.5rem);
-    }
-
-    h3 {
-      font-size: 1.2rem;
-    }
-
-    p {
-      margin: 0 0 12px;
-      color: var(--secondary-75);
-    }
-
-    .btn {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 0.5rem;
-      padding: 0.78rem 1.15rem;
-      border-radius: 4px;
-      border: 1px solid transparent;
-      font-weight: 400;
-      cursor: pointer;
-      transition: opacity 0.2s ease, border-color 0.2s ease, background-color 0.2s ease;
-      font-size: 0.94rem;
-      font-family: "DM Sans", sans-serif;
-    }
-
-    .btn:hover {
-      opacity: 0.88;
-    }
-
-    .btn-primary {
-      background: var(--text-main);
-      color: var(--button-on-accent);
-      border-color: var(--text-main);
-    }
-
-    .btn-primary:hover {
-      background: var(--accent);
-      border-color: var(--accent);
-    }
-
-    .btn-outline {
-      border-color: var(--text-main);
-      color: var(--text-main);
-      background: transparent;
-    }
-
-    .btn-outline:hover {
-      border-color: var(--text-main);
-      background: transparent;
-    }
-
-    .card {
-      background: #f4f0eb;
-      border: 0.5px solid #d9d2c8;
-      border-radius: var(--radius);
-      box-shadow: 0 1px 4px rgba(26, 26, 46, 0.06);
-      transition: border-color 0.2s ease, background-color 0.2s ease;
-    }
-
-    .card:hover {
-      border-color: var(--border-hover);
-      background: #ffffff;
-    }
-
-    .topbar-wrap {
+    .topbar {
       position: sticky;
       top: 0;
       z-index: 1000;
+      backdrop-filter: blur(12px);
+      background: var(--navbg);
+      border-bottom: 0.5px solid var(--border);
+    }
+
+    .contact-quick-bar {
+      height: 36px;
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      gap: 20px;
+      padding: 0 32px;
+      background: var(--bg2);
+      border-bottom: 0.5px solid var(--border);
       width: 100%;
-      backdrop-filter: none;
-      background: #faf8f5;
-      border-bottom: 1px solid var(--border-soft);
+    }
+
+    .contact-quick-bar a {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 11px;
+      color: var(--text2);
+      text-decoration: none;
+      transition: color 0.2s ease, opacity 0.2s ease;
+      white-space: nowrap;
+    }
+
+    .contact-quick-bar a:hover {
+      color: var(--accent);
+    }
+
+    .contact-quick-bar .quick-whatsapp {
+      color: #25d366;
+    }
+
+    .contact-quick-bar .quick-whatsapp:hover {
+      color: #25d366;
+      opacity: 0.85;
+    }
+
+    .ti {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      line-height: 1;
+      font-size: 13px;
+    }
+
+    .ti-phone::before {
+      content: "\f095";
+      font-family: "Font Awesome 6 Free";
+      font-weight: 900;
+    }
+
+    .ti-mail::before {
+      content: "\f0e0";
+      font-family: "Font Awesome 6 Free";
+      font-weight: 900;
+    }
+
+    .ti-brand-whatsapp::before {
+      content: "\f232";
+      font-family: "Font Awesome 6 Brands";
+      font-weight: 400;
     }
 
     .navbar {
-      min-height: 74px;
+      min-height: 80px;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 1rem;
-      width: 100%;
-      max-width: 100%;
+      gap: 16px;
+      width: min(1200px, calc(100% - 32px));
       margin: 0 auto;
-      padding: 0 20px;
+      position: relative;
     }
 
     .brand {
       display: flex;
       flex-direction: column;
       gap: 2px;
+      flex: 0 0 auto;
     }
 
     .brand-title {
-      font-family: "Playfair Display", serif;
-      font-weight: 600;
-      letter-spacing: 0.08em;
-      font-size: 1.05rem;
+      font-size: 0.95rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
     }
 
     .brand-tagline {
-      font-size: 0.72rem;
-      color: var(--meta-60);
-      letter-spacing: 0.05em;
+      font-size: 10px;
+      color: var(--text3);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
     }
 
     .menu-toggle {
       display: none;
       width: 42px;
       height: 42px;
-      border-radius: 4px;
-      background: #f4f0eb;
-      border: 1px solid #d9d2c8;
-      color: var(--text-main);
+      align-items: center;
+      justify-content: center;
+      border: 0.5px solid var(--border);
+      background: transparent;
+      border-radius: 10px;
       cursor: pointer;
+      flex: 0 0 auto;
+    }
+
+    .nav-panel {
+      display: flex;
+      align-items: center;
+      gap: 18px;
     }
 
     .nav-links {
+      list-style: none;
       display: flex;
       align-items: center;
-      gap: 1rem;
-      list-style: none;
+      gap: 18px;
       padding: 0;
       margin: 0;
     }
 
     .nav-links a {
-      color: var(--nav-80);
-      font-weight: 400;
-      font-size: 0.95rem;
-      position: relative;
-      font-family: "DM Sans", sans-serif;
+      color: var(--text2);
+      font-size: 0.94rem;
+      font-weight: 500;
+      transition: color 0.25s ease;
     }
 
-    .nav-links a::after {
-      content: "";
-      position: absolute;
-      left: 0;
-      bottom: -6px;
-      width: 0;
-      height: 2px;
+    .nav-links a:hover,
+    .nav-links a[aria-current="page"] {
+      color: var(--text);
+    }
+
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex: 0 0 auto;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.45rem;
+      padding: 0.75rem 1rem;
+      border-radius: 8px;
+      border: 0.5px solid transparent;
+      cursor: pointer;
+      transition: background-color 0.25s ease, color 0.25s ease, border-color 0.25s ease, transform 0.25s ease;
+      font-weight: 600;
+      line-height: 1;
+      white-space: nowrap;
+    }
+
+    .btn:hover {
+      transform: translateY(-1px);
+    }
+
+    .btn-primary {
       background: var(--accent);
-      transition: width 0.25s ease;
+      color: #ffffff;
+      border-color: var(--accent);
     }
 
-    .nav-links a:hover::after {
-      width: 100%;
+    .btn-outline {
+      background: transparent;
+      color: var(--text);
+      border-color: var(--border);
+    }
+
+    .theme-toggle {
+      width: 42px;
+      height: 42px;
+      border-radius: 10px;
+      background: transparent;
+      border: 0.5px solid var(--border);
+      color: var(--text);
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      transition: background-color 0.25s ease, color 0.25s ease, border-color 0.25s ease;
+    }
+
+    .theme-toggle:hover,
+    .menu-toggle:hover {
+      border-color: var(--accent2);
+      color: var(--accent);
+    }
+
+    .menu-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(15, 23, 42, 0.24);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.25s ease;
+      z-index: 900;
+    }
+
+    .menu-backdrop.show {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    main {
+      display: block;
     }
 
     .hero {
-      width: 100%;
-      min-height: 100vh;
+      min-height: calc(100vh - 80px);
       display: flex;
       align-items: center;
-      padding: 60px 20px;
-      background-color: var(--bg-main);
+      padding: 72px 0 40px;
+      background: var(--bg);
     }
 
     .hero-grid {
-      display: grid;
-      grid-template-columns: 1.15fr 0.85fr;
-      gap: 1.4rem;
-      align-items: stretch;
-      width: 100%;
-      max-width: 1280px;
+      width: min(1200px, calc(100% - 32px));
       margin: 0 auto;
-    }
-
-    .hero-main,
-    .hero-side {
-      padding: 1.6rem;
-    }
-
-    .hero-tagline {
-      color: var(--meta-60);
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-      font-size: 0.78rem;
-      font-weight: 700;
-      margin-bottom: 12px;
-      display: block;
-    }
-
-    .hero-main p {
-      max-width: 64ch;
-    }
-
-    .hero-actions {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.8rem;
-      margin: 1.2rem 0;
-    }
-
-    .check-list {
-      list-style: none;
-      padding: 0;
-      margin: 1rem 0 0;
-      display: grid;
-      gap: 0.65rem;
-    }
-
-    .check-list li {
-      display: flex;
-      gap: 0.6rem;
-      align-items: flex-start;
-      color: var(--text-main);
-    }
-
-    .check-list i {
-      margin-top: 0.3rem;
-      color: var(--accent);
-    }
-
-    .batch-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.45rem;
-      background: #e8e0d5;
-      color: var(--accent);
-      border: 1px solid #d9d2c8;
-      padding: 0.55rem 0.9rem;
-      border-radius: 999px;
-      font-weight: 600;
-      margin-bottom: 1rem;
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-    }
-
-    .steps {
-      display: grid;
-      gap: 0.85rem;
-      margin: 1rem 0 0;
-    }
-
-    .step {
-      border: 0.5px solid #d9d2c8;
-      border-radius: 12px;
-      padding: 0.9rem;
-      display: grid;
-      grid-template-columns: auto 1fr;
-      gap: 0.8rem;
-      align-items: center;
-      background: #f4f0eb;
-    }
-
-    .step-number {
-      width: 2.2rem;
-      height: 2.2rem;
-      border-radius: 999px;
-      border: 1px solid var(--accent);
-      display: grid;
-      place-items: center;
-      font-weight: 700;
-      color: var(--accent);
-      font-size: 0.9rem;
-    }
-
-    .hero-foot {
-      margin-top: 1rem;
-      color: var(--secondary-75);
-      font-weight: 500;
-    }
-
-    .pill-grid {
-      margin-top: 1.2rem;
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 0.85rem;
-    }
-
-    .pill {
-      padding: 0.85rem 0.95rem;
-      border-radius: 12px;
-      border: 0.5px solid #d9d2c8;
-      background: #f4f0eb;
-      color: var(--secondary-75);
-      font-size: 0.93rem;
-    }
-
-    .about-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 1.1rem;
-      align-items: start;
+      gap: 20px;
+      align-items: stretch;
     }
 
-    .mentor-card {
-      padding: 1.4rem;
+    .card {
+      background: var(--surface);
+      border: 0.5px solid var(--border);
+      border-radius: var(--radius-md);
+      transition: transform 0.25s ease, border-color 0.25s ease, background-color 0.25s ease;
     }
 
-    .avatar {
-      width: 88px;
-      height: 88px;
-      border-radius: 999px;
-      border: 1px solid var(--line-accent);
-      background: rgba(139, 115, 85, 0.12);
+    .hero-main {
+      padding: 22px;
       display: grid;
-      place-items: center;
-      font-weight: 700;
-      font-size: 1.2rem;
-      color: var(--accent);
-      margin-bottom: 1rem;
+      gap: 18px;
+      align-content: center;
     }
 
-    .skills-list {
-      list-style: none;
-      padding: 0;
-      margin: 0.9rem 0 0;
-      display: grid;
-      gap: 0.5rem;
-    }
-
-    .skills-list li {
-      display: flex;
-      gap: 0.55rem;
-      align-items: center;
-    }
-
-    .skills-list li i {
-      color: var(--accent);
-    }
-
-    .social-row {
-      margin-top: 1rem;
-      display: flex;
-      gap: 0.65rem;
-      flex-wrap: wrap;
-    }
-
-    .social-btn {
-      border: 1px solid #d9d2c8;
-      background: transparent;
-      color: var(--secondary-75);
-      padding: 0.52rem 0.78rem;
-      border-radius: 999px;
-      font-size: 0.9rem;
+    .hero-badge {
+      width: fit-content;
       display: inline-flex;
       align-items: center;
-      gap: 0.5rem;
-      transition: 0.2s ease;
-    }
-
-    .social-btn:hover {
-      border-color: var(--accent);
-      color: var(--accent);
-      background: rgba(139, 115, 85, 0.1);
-    }
-
-    .program-grid,
-    .stories-grid,
-    .mentor-grid,
-    .testimonial-grid,
-    .stats-grid {
-      display: grid;
-      gap: 0.95rem;
-    }
-
-    .program-grid {
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      margin-top: 1rem;
-    }
-
-    .program-card {
-      padding: 1.1rem;
-    }
-
-    .program-card h3 {
-      margin-bottom: 8px;
-    }
-
-    .why-box {
-      padding: 1.35rem;
-    }
-
-    .plain-list {
-      margin: 0.9rem 0 0;
-      padding-left: 1.1rem;
-      color: var(--secondary-75);
-    }
-
-    .plain-list li {
-      margin-bottom: 0.4rem;
-    }
-
-    .practice-tests-shell {
-      display: grid;
-      gap: 1.1rem;
-      justify-items: center;
-    }
-
-    .practice-tests-intro {
-      width: 100%;
-      max-width: 860px;
-      text-align: left;
-    }
-
-    .practice-tests-intro .practice-tests-label {
-      display: inline-block;
-      margin-bottom: 10px;
-      color: #8b7355;
-      font-size: 11px;
-      font-weight: 600;
-      letter-spacing: 0.12em;
-      line-height: 1;
-      text-transform: uppercase;
-    }
-
-    .practice-tests-intro h2 {
-      margin-bottom: 10px;
-    }
-
-    .practice-tests-intro p {
-      max-width: 62ch;
-      color: #6b6560;
-    }
-
-    .practice-tests-card {
-      display: flex;
-      width: 100%;
-      max-width: 860px;
-      margin: 0 auto;
-      overflow: hidden;
-      border: 0.5px solid #d9d2c8;
-      border-radius: 8px;
-      background: #ffffff;
-    }
-
-    .practice-tests-list {
-      flex: 0 0 200px;
-      width: 200px;
-      display: flex;
-      flex-direction: column;
-      background: #f4f0eb;
-      border-right: 0.5px solid #d9d2c8;
-    }
-
-    .practice-test-item {
-      position: relative;
-      width: 100%;
-      padding: 13px 18px 13px 34px;
-      border: 0;
-      border-bottom: 0.5px solid #d9d2c8;
-      background: transparent;
-      color: #6b6560;
-      cursor: pointer;
-      font: inherit;
-      font-size: 12px;
-      text-align: left;
-      transition: background-color 0.2s ease, color 0.2s ease;
-    }
-
-    .practice-test-item::before {
-      content: "";
-      position: absolute;
-      left: 18px;
-      top: 50%;
-      width: 6px;
-      height: 6px;
-      border-radius: 50%;
-      background: #8b7355;
-      transform: translateY(-50%);
-      transition: background-color 0.2s ease;
-    }
-
-    .practice-test-item:hover {
-      background: #e8e0d5;
-    }
-
-    .practice-test-item.active {
-      background: #1a1a2e;
-      color: #faf8f5;
-    }
-
-    .practice-test-item.active::before {
-      background: #faf8f5;
-    }
-
-    .practice-test-item:last-child {
-      border-bottom: none;
-    }
-
-    .practice-tests-detail {
-      flex: 1;
-      display: grid;
-      align-content: start;
-      gap: 0.9rem;
-      padding: 24px 28px;
-      background: #ffffff;
-    }
-
-    .practice-tests-tag {
-      color: #8b7355;
-      font-size: 9px;
+      gap: 8px;
+      padding: 0.5rem 0.8rem;
+      border-radius: 999px;
+      background: var(--accentbg);
+      color: var(--accenttext);
+      border: 0.5px solid var(--accent2);
+      font-size: 0.78rem;
       font-weight: 700;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-    }
-
-    .practice-tests-title {
-      margin: 0;
-      color: #1a1a2e;
-      font-family: "Playfair Display", serif;
-      font-size: 18px;
-      line-height: 1.25;
-    }
-
-    .practice-tests-description {
-      margin: 0;
-      color: #6b6560;
-      font-size: 13px;
-      line-height: 1.65;
-    }
-
-    .practice-tests-stats {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 0.85rem;
-      max-width: 320px;
-    }
-
-    .practice-tests-stat {
-      display: grid;
-      gap: 0.15rem;
-      align-content: start;
-    }
-
-    .practice-tests-stat strong {
-      color: #1a1a2e;
-      font-family: "DM Sans", sans-serif;
-      font-size: 22px;
-      font-weight: 500;
-      line-height: 1;
-    }
-
-    .practice-tests-stat span {
-      color: #8b7355;
-      font-size: 10px;
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
-    }
-
-    .practice-tests-cta {
-      justify-self: start;
-      padding: 7px 18px;
-      border-radius: 3px;
-      font-size: 0.88rem;
-    }
-
-    .practice-tests-cta:hover {
-      background: #8b7355;
-      border-color: #8b7355;
-      color: #faf8f5;
-      opacity: 1;
-    }
-
-    .results-head {
-      margin-bottom: 1rem;
-    }
-
-    .stats-grid {
-      grid-template-columns: repeat(4, minmax(0, 1fr));
-      margin-bottom: 1rem;
-    }
-
-    .stat {
-      text-align: center;
-      padding: 1rem;
-    }
-
-    .stat strong {
-      display: block;
-      font-size: clamp(1.25rem, 2.2vw, 1.8rem);
-      color: var(--accent);
-      margin-bottom: 3px;
-      font-family: "Playfair Display", serif;
-    }
-
-    .testimonial-grid {
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-    }
-
-    blockquote {
-      margin: 0;
-      padding: 1.05rem;
-      border-left: 3px solid var(--accent);
-      border-radius: 12px;
-      background: #f4f0eb;
-      color: var(--secondary-75);
-      font-style: italic;
-    }
-
-    .stories-grid {
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-    }
-
-    .student-card,
-    .mentor-panel {
-      padding: 1.1rem;
-      text-align: center;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
-
-    .student-card .avatar,
-    .mentor-panel .avatar {
-      margin: 0 auto 0.8rem;
-      width: 100px;
-      height: 100px;
-    }
-
-    .student-card img {
-      width: 100px;
-      height: 100px;
-      border-radius: 50%;
-      border: 2px solid var(--line-accent);
-      object-fit: cover;
-      margin-bottom: 0.8rem;
-    }
-
-    .student-entry {
-      font-size: 0.8rem;
-      color: var(--accent);
-      font-weight: 700;
-      text-transform: uppercase;
-      margin: 0.4rem 0;
       letter-spacing: 0.08em;
+      text-transform: uppercase;
     }
 
-    .student-year {
-      font-size: 0.85rem;
-      color: var(--meta-60);
-      margin: 0.3rem 0 0.8rem;
-    }
-
-    .student-testimonial {
-      font-style: italic;
-      color: var(--secondary-75);
-      font-size: 0.9rem;
-    }
-
-    .mentor-grid {
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-    }
-
-    .timeline {
-      margin-top: 1rem;
-      display: grid;
-      grid-template-columns: repeat(4, minmax(0, 1fr));
-      gap: 0.9rem;
-    }
-
-    .timeline-step {
-      padding: 1rem;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .timeline-step::before {
-      content: "";
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 3px;
+    .badge-dot {
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
       background: var(--accent);
+      flex: 0 0 auto;
     }
 
-    .faq-wrap {
-      margin-top: 1rem;
-      display: grid;
-      gap: 0.7rem;
+    h1,
+    h2,
+    h3,
+    h4,
+    p {
+      margin: 0;
     }
 
-    .faq-item {
-      border: 0.5px solid #d9d2c8;
-      border-radius: 12px;
-      background: #f4f0eb;
-      overflow: hidden;
-    }
-
-    .faq-btn {
-      width: 100%;
-      text-align: left;
-      padding: 0.95rem 1rem;
-      border: none;
-      background: transparent;
-      color: var(--text-main);
-      font-size: 0.98rem;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      cursor: pointer;
-    }
-
-    .faq-content {
-      max-height: 0;
-      overflow: hidden;
-      transition: max-height 0.28s ease;
-      color: var(--secondary-75);
-      padding: 0 1rem;
-    }
-
-    .faq-item.active .faq-content {
-      max-height: 140px;
-      padding-bottom: 0.9rem;
-    }
-
-    .faq-item.active .faq-btn i {
-      transform: rotate(180deg);
-    }
-
-    .faq-btn i {
-      transition: transform 0.2s ease;
-      color: var(--accent);
-    }
-
-    .contact-grid {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 1rem;
-    }
-
-    .form-card {
-      padding: 1.15rem;
-    }
-
-    .form-grid {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 0.75rem;
-      margin-top: 0.9rem;
-    }
-
-    .field {
-      display: flex;
-      flex-direction: column;
-      gap: 0.3rem;
-    }
-
-    .field label {
-      font-size: 0.84rem;
-      color: var(--meta-60);
-    }
-
-    input,
-    select,
-    textarea {
-      background: #ffffff;
-      border: 1px solid #d9d2c8;
-      color: var(--text-main);
-      border-radius: 4px;
-      padding: 0.66rem 0.7rem;
-      font: inherit;
-    }
-
-    input:focus,
-    select:focus,
-    textarea:focus {
-      outline: 2px solid rgba(139, 115, 85, 0.25);
-      border-color: var(--accent);
-    }
-
-    textarea {
-      min-height: 120px;
-      resize: vertical;
-    }
-
-    .form-full-width {
-      grid-column: 1 / -1;
-    }
-
-    .form-actions {
-      margin-top: 0.95rem;
-    }
-
-    .cta-banner {
-      margin-top: 0.8rem;
-      padding: 1.4rem;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 1rem;
-      flex-wrap: wrap;
-    }
-
-    .cta-actions {
-      display: flex;
-      gap: 0.7rem;
-      flex-wrap: wrap;
-    }
-
-    footer {
-      padding: 26px 0 32px;
-      border-top: 1px solid var(--border-soft);
-    }
-
-    .footer-row {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 0.8rem;
-      flex-wrap: wrap;
-    }
-
-    .fade-up {
-      animation: none;
-    }
-
-    @keyframes fadeUp {
-      from {
-        transform: translateY(10px);
-        opacity: 0;
-      }
-      to {
-        transform: translateY(0);
-        opacity: 1;
-      }
-    }
-
-    @media (max-width: 1000px) {
-      .hero-grid,
-      .about-grid,
-      .timeline {
-        grid-template-columns: 1fr;
-      }
-
-      .program-grid,
-      .stories-grid,
-      .mentor-grid,
-      .testimonial-grid {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-      }
-
-      .stats-grid {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-      }
-    }
-
-    @media (max-width: 780px) {
-      .menu-toggle {
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-      }
-
-      .menu-backdrop {
-        position: fixed;
-        inset: 0;
-        background: var(--overlay);
-        opacity: 0;
-        pointer-events: none;
-        transition: opacity 0.2s ease;
-        z-index: 900;
-      }
-
-      .menu-backdrop.show {
-        opacity: 1;
-        pointer-events: auto;
-      }
-
-      .nav-links {
-        position: absolute;
-        top: 74px;
-        right: 1rem;
-        left: 1rem;
-        background: #faf8f5;
-        border: 1px solid var(--border-soft);
-        border-radius: 12px;
-        padding: 0.7rem;
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 0.3rem;
-        display: none;
-        z-index: 950;
-      }
-
-      .nav-links.open {
-        display: flex;
-      }
-
-      .nav-links li {
-        width: 100%;
-      }
-
-      .nav-links a,
-      .nav-links .btn {
-        width: 100%;
-        text-align: left;
-      }
-
-      .nav-links .btn {
-        justify-content: center;
-      }
-
-      .pill-grid,
-      .program-grid,
-      .stories-grid,
-      .mentor-grid,
-      .testimonial-grid,
-      .stats-grid,
-      .form-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .practice-tests-card {
-        flex-direction: column;
-      }
-
-      .practice-tests-list {
-        width: 100%;
-        flex: 0 0 auto;
-        flex-direction: row;
-        overflow-x: auto;
-        border-right: none;
-        border-bottom: 0.5px solid #d9d2c8;
-        scrollbar-width: none;
-        -ms-overflow-style: none;
-      }
-
-      .practice-tests-list::-webkit-scrollbar {
-        display: none;
-      }
-
-      .practice-test-item {
-        flex: 0 0 auto;
-        min-width: 132px;
-        border-bottom: none;
-        border-right: 0.5px solid #d9d2c8;
-        white-space: nowrap;
-        padding: 12px 16px 12px 30px;
-      }
-
-      .practice-test-item:last-child {
-        border-right: none;
-      }
-
-      .practice-tests-detail {
-        padding: 20px;
-      }
-
-      .practice-tests-stats {
-        max-width: none;
-      }
-
-      .section {
-        padding: 64px 20px;
-      }
-
-      .hero {
-        min-height: 80vh;
-      }
+    h1 {
+      font-size: clamp(2.35rem, 4.4vw, 3.2rem);
+      font-weight: 800;
+      line-height: 1.1;
+      letter-spacing: -0.02em;
+      max-width: 12ch;
     }
 
     .accent-word {
       color: var(--accent);
     }
 
-    .nav-links a.active::after,
-    .nav-links a[aria-current="page"]::after {
-      width: 100%;
-      height: 2px;
+    .hero-copy {
+      max-width: 380px;
+      font-size: 14px;
+      color: var(--text2);
+      line-height: 1.7;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .hero .btn {
+      padding: 0.86rem 1.05rem;
+    }
+
+    .hero .btn-primary {
+      border-radius: 8px;
+    }
+
+    .hero .btn-outline {
+      border-radius: 8px;
+    }
+
+    .social-proof {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+
+    .avatar-stack {
+      display: flex;
+      align-items: center;
+    }
+
+    .proof-avatar {
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      background: var(--bg3);
+      border: 0.5px solid var(--border);
+      font-size: 10px;
+      font-weight: 700;
+      color: var(--text);
+      margin-left: -6px;
+    }
+
+    .proof-avatar:first-child {
+      margin-left: 0;
+    }
+
+    .proof-text {
+      font-size: 0.92rem;
+      color: var(--text2);
+    }
+
+    .proof-number {
+      color: var(--accent);
+      font-weight: 700;
+    }
+
+    .hero-stack {
+      display: grid;
+      gap: 12px;
+      align-content: start;
+    }
+
+    .program-preview {
+      padding: 18px;
+      display: grid;
+      gap: 12px;
+    }
+
+    .preview-top,
+    .mentor-mini {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .preview-label {
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--text3);
+    }
+
+    .preview-badge {
+      padding: 0.35rem 0.6rem;
+      border-radius: 999px;
+      background: var(--successbg);
+      color: var(--successtext);
+      border: 0.5px solid var(--successborder);
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+
+    .preview-title {
+      font-size: 0.95rem;
+      font-weight: 700;
+    }
+
+    .preview-subtitle {
+      font-size: 0.84rem;
+      color: var(--text2);
+    }
+
+    .divider {
+      height: 1px;
+      background: var(--border);
+    }
+
+    .feature-list {
+      list-style: none;
+      display: grid;
+      gap: 10px;
+      padding: 0;
+      margin: 0;
+    }
+
+    .feature-list li {
+      display: flex;
+      gap: 10px;
+      align-items: flex-start;
+      color: var(--text2);
+      font-size: 0.92rem;
+    }
+
+    .feature-dot {
+      width: 4px;
+      height: 4px;
+      margin-top: 0.6rem;
+      border-radius: 50%;
       background: var(--accent);
+      flex: 0 0 auto;
     }
 
-    .section h2 {
+    .mentor-mini {
+      padding: 14px 18px;
+    }
+
+    .mentor-left {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      min-width: 0;
+    }
+
+    .mentor-avatar,
+    .story-avatar {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      background: var(--accentbg);
+      color: var(--accenttext);
+      border: 0.5px solid var(--accent2);
+      font-weight: 700;
+      flex: 0 0 auto;
+    }
+
+    .mentor-name {
+      font-size: 0.95rem;
+      font-weight: 700;
+      line-height: 1.25;
+    }
+
+    .mentor-sub {
+      font-size: 10px;
+      color: var(--text3);
+      letter-spacing: 0.02em;
+      line-height: 1.4;
+    }
+
+    .icon-links {
+      display: flex;
+      gap: 6px;
+      flex: 0 0 auto;
+    }
+
+    .icon-link {
+      width: 30px;
+      height: 30px;
+      border-radius: 8px;
+      border: 0.5px solid var(--border);
+      background: transparent;
+      color: var(--text2);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      transition: background-color 0.25s ease, color 0.25s ease, border-color 0.25s ease;
+    }
+
+    .icon-link:hover {
+      color: var(--accent);
+      border-color: var(--accent2);
+      background: var(--accentbg);
+    }
+
+    .section {
+      padding: 84px 0;
+      border-top: 0.5px solid var(--border);
+      background: var(--bg);
+    }
+
+    .section:nth-of-type(even) {
+      background: var(--bg2);
+    }
+
+    .section-label {
+      display: inline-block;
+      margin-bottom: 12px;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--text3);
+    }
+
+    .section-title {
+      max-width: 20ch;
+      font-size: clamp(1.5rem, 3vw, 2.4rem);
+      font-weight: 800;
+      line-height: 1.15;
+      letter-spacing: -0.02em;
+      margin-bottom: 16px;
+    }
+
+    .section-copy {
+      max-width: 70ch;
+      color: var(--text2);
+      line-height: 1.75;
+    }
+
+    .stats-bar {
+      padding: 0;
+      border-top: 0.5px solid var(--border);
+      border-bottom: 0.5px solid var(--border);
+      background: var(--bg);
+    }
+
+    .stats-grid {
+      width: min(1200px, calc(100% - 32px));
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+
+    .stat-box {
+      padding: 20px 16px;
+      text-align: center;
+    }
+
+    .stat-box:not(:last-child) {
+      border-right: 0.5px solid var(--border);
+    }
+
+    .stat-value {
+      display: block;
+      font-size: 22px;
+      font-weight: 800;
+      color: var(--accent);
+      line-height: 1.1;
+      margin-bottom: 4px;
+    }
+
+    .stat-label {
+      font-size: 10px;
+      font-weight: 700;
+      color: var(--text3);
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
+    .program-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 16px;
+      margin-top: 22px;
+    }
+
+    .program-card {
+      padding: 20px;
+      border-left: 3px solid var(--accent);
+      border-radius: var(--radius-md);
+      background: var(--surface);
+    }
+
+    .program-card:hover {
+      transform: translateY(-2px);
+      border-left-color: var(--accent2);
+    }
+
+    .program-card h3 {
+      font-size: 1rem;
+      margin-bottom: 10px;
+      font-weight: 700;
+    }
+
+    .program-card p {
+      color: var(--text2);
+      font-size: 0.95rem;
+    }
+
+    .practice-layout {
+      display: grid;
+      grid-template-columns: 240px minmax(0, 1fr);
+      gap: 0;
+      border: 0.5px solid var(--border);
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      background: var(--surface);
+      margin-top: 22px;
+    }
+
+    .practice-tabs {
+      display: flex;
+      flex-direction: column;
+      background: var(--bg2);
+      border-right: 0.5px solid var(--border);
+    }
+
+    .practice-tab {
+      appearance: none;
+      border: 0;
+      border-bottom: 0.5px solid var(--border);
+      background: transparent;
+      color: var(--text2);
+      text-align: left;
+      padding: 14px 16px;
+      cursor: pointer;
+      font-weight: 600;
+      transition: background-color 0.25s ease, color 0.25s ease, border-color 0.25s ease;
+    }
+
+    .practice-tab.active {
+      background: var(--bg3);
+      color: var(--text);
+      border-left: 3px solid var(--accent);
+      padding-left: 13px;
+    }
+
+    .practice-panel {
+      padding: 24px;
+      display: grid;
+      gap: 14px;
+      align-content: start;
+    }
+
+    .practice-tag {
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--accenttext);
+    }
+
+    .practice-title {
+      font-size: 1.1rem;
+      font-weight: 700;
+      line-height: 1.3;
+    }
+
+    .practice-description {
+      color: var(--text2);
+      max-width: 62ch;
+    }
+
+    .practice-stats {
+      display: flex;
+      gap: 18px;
+      flex-wrap: wrap;
+    }
+
+    .practice-stat {
+      display: grid;
+      gap: 2px;
+    }
+
+    .practice-stat strong {
+      font-size: 22px;
+      font-weight: 800;
+      color: var(--accent);
+      line-height: 1;
+    }
+
+    .practice-stat span {
+      font-size: 10px;
+      font-weight: 700;
+      color: var(--text3);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+      align-items: start;
+      margin-top: 22px;
+    }
+
+    .about-card,
+    .mentor-card,
+    .form-card,
+    .quote-card,
+    .journey-card {
+      padding: 24px;
+      background: var(--surface);
+      border: 0.5px solid var(--border);
+      border-radius: var(--radius-lg);
+    }
+
+    .mentor-card {
+      display: grid;
+      gap: 16px;
+    }
+
+    .avatar-lg {
+      width: 64px;
+      height: 64px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      background: var(--accentbg);
+      border: 0.5px solid var(--accent2);
+      color: var(--accenttext);
+      font-weight: 800;
+      font-size: 1rem;
+    }
+
+    .mentor-heading {
+      display: grid;
+      gap: 6px;
+    }
+
+    .mentor-heading h3 {
+      font-size: 1rem;
+      font-weight: 800;
+    }
+
+    .mentor-heading p {
+      color: var(--text2);
+      font-size: 0.95rem;
+    }
+
+    .mentor-quote {
+      color: var(--text2);
+      font-style: italic;
+    }
+
+    .check-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: grid;
+      gap: 10px;
+    }
+
+    .check-list li {
+      display: flex;
+      gap: 10px;
+      align-items: flex-start;
+      color: var(--text2);
+      font-size: 0.95rem;
+    }
+
+    .check-list i {
+      color: var(--accent);
+      margin-top: 0.2rem;
+      flex: 0 0 auto;
+    }
+
+    .social-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 4px;
+    }
+
+    .social-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 0.6rem 0.85rem;
+      border: 0.5px solid var(--border);
+      border-radius: 999px;
+      background: transparent;
+      color: var(--text2);
+      transition: background-color 0.25s ease, color 0.25s ease, border-color 0.25s ease;
+    }
+
+    .social-pill:hover {
+      color: var(--text);
+      border-color: var(--accent2);
+      background: var(--accentbg);
+    }
+
+    .contact-direct-note {
+      font-size: 12px;
+      color: var(--text2);
+      margin-bottom: 12px;
+    }
+
+    .contact-direct-row {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-bottom: 24px;
+    }
+
+    .contact-direct-row a {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 9px 18px;
+      border-radius: 8px;
+      border: 0.5px solid var(--border);
+      background: var(--surface);
+      color: var(--text2);
+      font-size: 12px;
+      text-decoration: none;
+      transition: all 0.2s ease;
+    }
+
+    .contact-direct-row a:hover {
+      background: var(--accentbg);
+      color: var(--accenttext);
+      border-color: var(--accent2);
+    }
+
+    .contact-direct-row .contact-whatsapp:hover {
+      background: rgba(37, 211, 102, 0.1);
+      color: #25d366;
+      border-color: rgba(37, 211, 102, 0.4);
+    }
+
+    .whatsapp-float {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      z-index: 999;
+      width: 52px;
+      height: 52px;
+      border-radius: 50%;
+      background: #25d366;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-decoration: none;
+      box-shadow: 0 2px 12px rgba(37, 211, 102, 0.35);
+      transition: transform 0.2s ease, opacity 0.2s ease;
+    }
+
+    .whatsapp-float:hover {
+      opacity: 1;
+    }
+
+    .whatsapp-float .whatsapp-tooltip {
+      position: absolute;
+      bottom: 58px;
+      right: 0;
+      white-space: nowrap;
+      background: #1a1a1a;
+      color: #ffffff;
+      font-size: 11px;
+      border-radius: 6px;
+      padding: 4px 10px;
+      opacity: 0;
+      pointer-events: none;
+      transform: translateY(4px);
+      transition: opacity 0.2s ease, transform 0.2s ease;
+    }
+
+    .whatsapp-float:hover .whatsapp-tooltip {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .whatsapp-float:hover {
+      transform: scale(1.1);
+    }
+
+    .results-grid {
+      display: grid;
+      gap: 20px;
+      margin-top: 22px;
+    }
+
+    .testimonial-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 16px;
+    }
+
+    .quote-card {
+      display: grid;
+      gap: 14px;
+      align-content: start;
+    }
+
+    .quote-mark {
+      font-size: 36px;
+      line-height: 1;
+      color: var(--accent);
+      opacity: 0.3;
+      font-weight: 800;
+    }
+
+    .quote-card p {
+      color: var(--text2);
+      line-height: 1.75;
+    }
+
+    .stars {
+      display: flex;
+      gap: 4px;
+      color: var(--accent);
+    }
+
+    .quote-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .quote-name {
+      font-weight: 700;
+    }
+
+    .recommended-badge {
+      display: inline-flex;
+      align-items: center;
+      padding: 0.3rem 0.6rem;
+      border-radius: 999px;
+      border: 0.5px solid var(--successborder);
+      background: var(--successbg);
+      color: var(--successtext);
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
+    .journey-card {
+      display: grid;
+      gap: 18px;
+    }
+
+    .timeline {
       position: relative;
-      padding-top: 12px;
+      display: grid;
+      gap: 18px;
+      padding-left: 18px;
     }
 
-    .section h2::before {
+    .timeline::before {
       content: "";
       position: absolute;
-      top: 0;
-      left: 0;
-      width: 30px;
-      height: 2px;
+      left: 6px;
+      top: 4px;
+      bottom: 4px;
+      width: 2px;
       background: var(--accent);
+      opacity: 0.3;
+    }
+
+    .timeline-step {
+      position: relative;
+      padding-left: 18px;
+    }
+
+    .timeline-step::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 8px;
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      background: var(--surface);
+      border: 2px solid var(--accent);
+    }
+
+    .timeline-step h3 {
+      font-size: 1rem;
+      font-weight: 700;
+      margin-bottom: 6px;
+    }
+
+    .timeline-step p {
+      color: var(--text2);
+    }
+
+    .contact-card {
+      padding: 32px;
+    }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+      margin-top: 20px;
+    }
+
+    .field-full {
+      grid-column: 1 / -1;
+    }
+
+    .field {
+      display: grid;
+      gap: 6px;
+    }
+
+    input,
+    textarea {
+      width: 100%;
+      border: 0.5px solid var(--border);
+      background: var(--surface);
+      color: var(--text);
+      border-radius: 10px;
+      padding: 0.85rem 0.95rem;
+      transition: border-color 0.25s ease, background-color 0.25s ease, color 0.25s ease;
+    }
+
+    textarea {
+      min-height: 140px;
+      resize: vertical;
+    }
+
+    input::placeholder,
+    textarea::placeholder {
+      color: var(--text3);
+    }
+
+    input:focus,
+    textarea:focus {
+      border-color: var(--accent2);
+      outline: 2px solid var(--focus);
+    }
+
+    .form-actions {
+      margin-top: 16px;
+    }
+
+    .form-message {
+      display: none;
+      margin-top: 16px;
+      padding: 0.9rem 1rem;
+      border-radius: 10px;
+      border: 0.5px solid var(--border);
+      background: var(--bg2);
+      color: var(--text2);
+    }
+
+    .footer {
+      background: var(--bg2);
+      border-top: 0.5px solid var(--border);
+      padding: 24px 0 18px;
+    }
+
+    .footer-main,
+    .footer-bottom {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .footer-links {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 18px;
+      flex-wrap: wrap;
+    }
+
+    .footer-links a,
+    .footer-social a {
+      color: var(--text2);
+      font-size: 0.94rem;
+    }
+
+    .footer-social {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .footer-bottom {
+      margin-top: 16px;
+      padding-top: 16px;
+      border-top: 0.5px solid var(--border);
+      color: var(--text3);
+      font-size: 0.92rem;
+    }
+
+    @media (max-width: 1024px) {
+      .program-grid,
+      .testimonial-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .hero-grid,
+      .about-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .navbar {
+        min-height: 72px;
+      }
+
+      .menu-toggle {
+        display: inline-flex;
+      }
+
+      .nav-panel {
+        position: absolute;
+        top: calc(100% + 10px);
+        left: 0;
+        right: 0;
+        display: none;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 14px;
+        padding: 16px;
+        background: var(--navbg);
+        border: 0.5px solid var(--border);
+        border-radius: 14px;
+      }
+
+      .nav-panel.open {
+        display: flex;
+      }
+
+      .nav-links {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 12px;
+      }
+
+      .nav-links a {
+        display: block;
+        padding: 0.2rem 0;
+      }
+
+      .nav-actions {
+        justify-content: flex-start;
+        flex-wrap: wrap;
+      }
+
+      .hero {
+        min-height: auto;
+        padding: 32px 0 28px;
+      }
+
+      .hero-grid {
+        gap: 14px;
+      }
+
+      .hero-main,
+      .program-preview,
+      .mentor-mini,
+      .practice-panel,
+      .about-card,
+      .mentor-card,
+      .form-card,
+      .quote-card,
+      .journey-card,
+      .contact-card {
+        padding: 18px;
+      }
+
+      .hero-copy {
+        max-width: none;
+      }
+
+      .stats-grid,
+      .program-grid,
+      .testimonial-grid,
+      .form-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .stats-grid {
+        width: min(1200px, calc(100% - 32px));
+      }
+
+      .stat-box:not(:last-child) {
+        border-right: 0;
+        border-bottom: 0.5px solid var(--border);
+      }
+
+      .practice-layout {
+        grid-template-columns: 1fr;
+      }
+
+      .practice-tabs {
+        border-right: 0;
+        border-bottom: 0.5px solid var(--border);
+        flex-direction: row;
+        overflow-x: auto;
+      }
+
+      .practice-tab {
+        border-bottom: 0;
+        border-right: 0.5px solid var(--border);
+        white-space: nowrap;
+      }
+
+      .practice-tab.active {
+        border-left: 0;
+        border-bottom: 3px solid var(--accent);
+        padding-left: 16px;
+        padding-bottom: 11px;
+      }
+
+      .section {
+        padding: 64px 0;
+      }
+
+      .footer-main,
+      .footer-bottom {
+        align-items: flex-start;
+      }
     }
   </style>
 </head>
 <body id="top">
   <div class="menu-backdrop" id="menuBackdrop" aria-hidden="true"></div>
-  <div class="topbar-wrap">
-    <nav class="navbar">
-      <a href="#top" class="brand" aria-label="SSB Catalyst Home">
+  <div class="contact-quick-bar" aria-label="Quick contact links">
+    <a href="tel:+919711414096"><i class="ti ti-phone" aria-hidden="true"></i> +91-97114-14096</a>
+    <a href="mailto:ssbcatalyst@gmail.com"><i class="ti ti-mail" aria-hidden="true"></i> ssbcatalyst@gmail.com</a>
+    <a href="https://wa.me/919711414096" target="_blank" rel="noopener" class="quick-whatsapp"><i class="ti ti-brand-whatsapp" aria-hidden="true"></i> WhatsApp Us</a>
+  </div>
+
+  <header class="topbar">
+    <nav class="navbar" aria-label="Primary">
+      <a href="#top" class="brand" aria-label="SSB Catalyst home">
         <span class="brand-title">SSB CATALYST</span>
-        <span class="brand-tagline">Clarity. Confidence. Recommendation.</span>
+        <span class="brand-tagline">Clarity · Confidence · Recommendation</span>
       </a>
 
-      <button class="menu-toggle" id="menuToggle" aria-label="Toggle navigation" aria-expanded="false">
+      <button class="menu-toggle" id="menuToggle" type="button" aria-label="Toggle navigation" aria-expanded="false">
         <i class="fa-solid fa-bars"></i>
       </button>
 
-      <ul class="nav-links" id="navLinks">
-        <li><a href="#about">About</a></li>
-        <li><a href="#programs">Programs</a></li>
-        <li><a href="#results">Results</a></li>
-        <li><a href="#mentors">Mentors</a></li>
-        <li><a href="#faq">FAQ</a></li>
-        <li><a href="#contact" >Book Demo</a></li>
-        <!-- <li><button id="themeToggle" aria-label="Toggle light and dark theme" class="btn btn-outline" style="border: 1px solid var(--text-main); cursor: pointer;"><i class="fas fa-moon"></i></button></li> -->
-      </ul>
-    </nav>
-  </div>
-
-  <header class="hero">
-    <div class="hero-grid">
-      <div class="hero-main card fade-up">
-        <span class="hero-tagline">SSB Coaching For Serious Defence Aspirants</span>
-        <h1>28 Attempts to <span class="accent-word">AIR 12</span>. The Ultimate <span class="accent-word">Comeback</span>.</h1>
-        <p>Train smarter for the Services Selection Board with a sharper, more personal approach.</p>
-
-        <div class="hero-actions">
-          <a href="#contact" class="btn btn-primary">Enroll Now</a>
-          <a href="#programs" class="btn btn-outline">Explore Programs</a>
-        </div>
-
-        <ul class="check-list">
-          <li><i class="fa-solid fa-circle-check"></i><span>Screening strategy and PPDT support</span></li>
-          <li><i class="fa-solid fa-circle-check"></i><span>Psychology, GTO and interview preparation</span></li>
-          <li><i class="fa-solid fa-circle-check"></i><span>Focused mentorship and performance feedback</span></li>
+      <div class="nav-panel" id="navPanel">
+        <ul class="nav-links" id="navLinks">
+          <li><a href="#about">About</a></li>
+          <li><a href="#programs">Programs</a></li>
+          <li><a href="#results">Results</a></li>
+          <li><a href="#mentors">Mentors</a></li>
+          <li><a href="#faq">FAQ</a></li>
         </ul>
 
-        <p class="hero-foot">Built for NDA, CDS, AFCAT, TES, SSC Tech and other defence aspirants.</p>
-
-        <div class="pill-grid">
-          <div class="pill"><strong>Preparation Model:</strong> Realistic, honest, personality-first SSB guidance</div>
-          <div class="pill"><strong>Core Focus:</strong> OLQs, communication, situation handling and self-awareness</div>
-          <div class="pill"><strong>Ideal For:</strong> Fresh aspirants and repeaters who want structured preparation</div>
+        <div class="nav-actions">
+          <a href="#contact" class="btn btn-primary">Enrol Now</a>
+          <button class="theme-toggle" id="themeToggle" type="button" aria-label="Toggle dark mode">
+            <i class="fa-solid fa-moon"></i>
+          </button>
         </div>
       </div>
-
-      <aside class="hero-side card fade-up">
-        <div class="batch-badge"><i class="fa-solid fa-bullhorn"></i> Next Batch - Admissions Open</div>
-
-        <div class="steps">
-          <div class="step">
-            <div class="step-number">01</div>
-            <p>Mock interview and storytelling drills</p>
-          </div>
-          <div class="step">
-            <div class="step-number">02</div>
-            <p>OLQ-based evaluation with personal feedback</p>
-          </div>
-          <div class="step">
-            <div class="step-number">03</div>
-            <p>Routine, discipline, clarity and confidence building</p>
-          </div>
-        </div>
-      </aside>
-    </div>
+    </nav>
   </header>
 
   <main>
-    <section id="about" class="section">
-      <div class="container about-grid">
-        <div class="card" style="padding: 1.35rem;">
-          <span class="section-label">About SSB Catalyst</span>
-          <h2>We prepare candidates to understand what the board observes and how to show it naturally.</h2>
-          <p>At SSB Catalyst, training is built around behavior, not shortcuts. Our model helps aspirants understand how officers are assessed in real board situations and how to communicate confidence without sounding rehearsed.</p>
-          <p>From PPDT narration to interview expression, every module is structured for clarity, honest feedback, and practical correction. The focus remains on consistency, OLQ alignment, and confidence under pressure.</p>
+    <section class="hero">
+      <div class="hero-grid">
+        <div class="hero-main card">
+          <div class="hero-badge"><span class="badge-dot"></span>SSB Coaching for Defence Aspirants</div>
+          <h1>28 Attempts.<br /><span class="accent-word">AIR 12.</span><br />The Comeback.</h1>
+          <p class="hero-copy">Train smarter for the Services Selection Board — OLQ-first methodology, personal feedback, and structured practice that builds real confidence under board conditions.</p>
+          <div class="hero-actions">
+            <a href="#contact" class="btn btn-primary">Enrol Now →</a>
+            <a href="#programs" class="btn btn-outline">Explore Programs</a>
+          </div>
+          <div class="social-proof">
+            <div class="avatar-stack" aria-hidden="true">
+              <div class="proof-avatar">A</div>
+              <div class="proof-avatar">C</div>
+              <div class="proof-avatar">M</div>
+              <div class="proof-avatar">P</div>
+            </div>
+            <p class="proof-text">Joined by <span class="proof-number">15+</span> aspirants · <span class="proof-number">7</span> recommended</p>
+          </div>
         </div>
 
-        <article class="mentor-card card">
-          <div class="avatar" aria-hidden="true">PS</div>
-          <h3>Prashant Saxena</h3>
-          <h3>Hey, I'm Prashant Saxena - a 28-time SSB repeater who earned AIR 12.</h3>
-          <p>I mentor candidates through mistakes I personally made and eventually fixed. The approach is straightforward: evaluate honestly, train specifically, and build a personality that stays natural in every SSB stage.</p>
+        <div class="hero-stack">
+          <article class="program-preview card">
+            <div class="preview-top">
+              <span class="preview-label">NEXT BATCH</span>
+              <span class="preview-badge">Admissions Open</span>
+            </div>
+            <div>
+              <div class="preview-title">Full SSB Preparation Program</div>
+              <div class="preview-subtitle">Screening · Psychology · GTO · Interview · Mock Assessments</div>
+            </div>
+            <div class="divider"></div>
+            <ul class="feature-list" aria-label="Program features">
+              <li><span class="feature-dot"></span><span>Mock interview and storytelling drills</span></li>
+              <li><span class="feature-dot"></span><span>OLQ-based evaluation with personal feedback</span></li>
+              <li><span class="feature-dot"></span><span>Routine, discipline, clarity and confidence building</span></li>
+              <li><span class="feature-dot"></span><span>Built for NDA, CDS, AFCAT, TES, SSC Tech</span></li>
+            </ul>
+          </article>
 
-          <ul class="skills-list">
-            <li><i class="fa-solid fa-check"></i> Screening Strategies (OIR &amp; PPDT)</li>
-            <li><i class="fa-solid fa-check"></i> Psychology Tips</li>
-            <li><i class="fa-solid fa-check"></i> GTO Techniques</li>
-            <li><i class="fa-solid fa-check"></i> Repeater-Specific Guidance</li>
-            <li><i class="fa-solid fa-check"></i> Interview Hacks</li>
-          </ul>
+          <article class="mentor-mini card">
+            <div class="mentor-left">
+              <div class="mentor-avatar">PS</div>
+              <div>
+                <div class="mentor-name">Prashant Saxena</div>
+                <div class="mentor-sub">Founder &amp; Lead Mentor · AIR 12 · 28 Attempts</div>
+              </div>
+            </div>
+            <div class="icon-links" aria-label="Mentor social links">
+              <a class="icon-link" href="https://t.me/ssbcatalyst" target="_blank" rel="noopener noreferrer" aria-label="Telegram"><i class="fa-brands fa-telegram"></i></a>
+              <a class="icon-link" href="https://www.youtube.com/@ssbcatalyst" target="_blank" rel="noopener noreferrer" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
 
-          <div class="social-row">
-            <a href="https://t.me/ssbcatalyst" target="_blank" rel="noopener noreferrer" class="social-btn" aria-label="Telegram"><i class="fa-brands fa-telegram"></i> Telegram</a>
-            <a href="https://www.instagram.com/ssbcatalyst?igsh=MTNjY3JqcmgyNTJwOQ==" target="_blank" class="social-btn" aria-label="Instagram"><i class="fa-brands fa-instagram"></i> Instagram</a>
-            <a href="https://www.youtube.com/@ssbcatalyst" target="_blank" rel="noopener noreferrer" class="social-btn" aria-label="YouTube"><i class="fa-brands fa-youtube"></i> YouTube</a>
-          </div>
-        </article>
+    <section class="stats-bar" aria-label="Key statistics">
+      <div class="stats-grid">
+        <div class="stat-box"><span class="stat-value">15+</span><span class="stat-label">Students Guided</span></div>
+        <div class="stat-box"><span class="stat-value">7</span><span class="stat-label">Recommended</span></div>
+        <div class="stat-box"><span class="stat-value">1:1</span><span class="stat-label">Personal Feedback</span></div>
+        <div class="stat-box"><span class="stat-value">28</span><span class="stat-label">Mentor's Attempts</span></div>
       </div>
     </section>
 
     <section id="programs" class="section">
       <div class="container">
         <span class="section-label">Programs &amp; Focus Areas</span>
-        <h2>Structured modules for every important stage of SSB preparation</h2>
+        <h2 class="section-title">Structured modules for every important stage of SSB preparation</h2>
+        <p class="section-copy">The program is intentionally narrow and practical: each module maps directly to the board's assessment stages, so aspirants can build reliable habits instead of memorizing generic advice.</p>
 
         <div class="program-grid">
           <article class="program-card card">
@@ -1269,7 +1475,7 @@
           </article>
           <article class="program-card card">
             <h3>Psychology Mastery</h3>
-            <p>TAT, WAT, SRT, and SD guided through self-awareness and time discipline.</p>
+            <p>TAT, WAT, SRT, SD guided through self-awareness and time discipline.</p>
           </article>
           <article class="program-card card">
             <h3>GTO Performance</h3>
@@ -1291,191 +1497,189 @@
       </div>
     </section>
 
-    <section class="section">
+    <section id="practice-tests" class="section">
       <div class="container">
-        <article class="why-box card">
-          <h2>More than content. We build readiness.</h2>
-          <p>Our preparation model is OLQ-first. Instead of overwhelming aspirants with random tactics, we focus on deliberate practice, observed behavior, reflection, and confidence under real assessment conditions.</p>
-          <ul class="plain-list">
-            <li>Clear understanding of OLQs</li>
-            <li>Focused practice instead of random preparation</li>
-            <li>Actionable feedback after every mock</li>
-            <li>Premium brand look that builds trust</li>
-          </ul>
-        </article>
-      </div>
-    </section>
+        <span class="section-label">Practice Tests</span>
+        <h2 class="section-title">Prepare Like a Soldier</h2>
+        <p class="section-copy">Five core SSB psychological tests — practice at your own pace.</p>
 
-    <section id="practice-tests" class="section practice-tests-section">
-      <div class="container practice-tests-shell">
-        <div class="practice-tests-intro">
-          <span class="practice-tests-label">Practice Tests</span>
-          <h2>Prepare Like a Soldier</h2>
-          <p>Five core SSB psychological tests — practice at your own pace.</p>
-        </div>
-
-        <div class="practice-tests-card" aria-label="SSB practice tests">
-          <div class="practice-tests-list" role="tablist" aria-label="Practice test list">
-            <button type="button" class="practice-test-item active" data-test="ppdt" aria-selected="true">PPDT</button>
-            <button type="button" class="practice-test-item" data-test="tat" aria-selected="false">TAT</button>
-            <button type="button" class="practice-test-item" data-test="wat" aria-selected="false">WAT</button>
-            <button type="button" class="practice-test-item" data-test="srt" aria-selected="false">SRT</button>
-            <button type="button" class="practice-test-item" data-test="sd" aria-selected="false">SD Practice</button>
+        <div class="practice-layout" aria-label="SSB practice tests">
+          <div class="practice-tabs" role="tablist" aria-label="Practice test list">
+            <button type="button" class="practice-tab active" data-test="ppdt" aria-selected="true">PPDT</button>
+            <button type="button" class="practice-tab" data-test="tat" aria-selected="false">TAT</button>
+            <button type="button" class="practice-tab" data-test="wat" aria-selected="false">WAT</button>
+            <button type="button" class="practice-tab" data-test="srt" aria-selected="false">SRT</button>
+            <button type="button" class="practice-tab" data-test="sd" aria-selected="false">SD Practice</button>
           </div>
 
-          <div class="practice-tests-detail">
-            <div class="practice-tests-tag" id="practiceTestTag">Psychological Test</div>
-            <h3 class="practice-tests-title" id="practiceTestTitle">Picture Perception &amp; Description Test</h3>
-            <p class="practice-tests-description" id="practiceTestDescription">View a hazy image for 30 seconds, write a short story, then narrate it in a group. Tests imagination, leadership cues, and positive thinking.</p>
+          <div class="practice-panel">
+            <div class="practice-tag" id="practiceTestTag">PSYCHOLOGICAL TEST</div>
+            <h3 class="practice-title" id="practiceTestTitle">Picture Perception &amp; Description Test</h3>
+            <p class="practice-description" id="practiceTestDescription">View a hazy image for 30 seconds, write a short story, then narrate it in a group.</p>
 
-            <div class="practice-tests-stats">
-              <div class="practice-tests-stat">
+            <div class="practice-stats">
+              <div class="practice-stat">
                 <strong id="practiceTestStatOneValue">12</strong>
                 <span id="practiceTestStatOneLabel">Practice Sets</span>
               </div>
-              <div class="practice-tests-stat">
+              <div class="practice-stat">
                 <strong id="practiceTestStatTwoValue">30s</strong>
                 <span id="practiceTestStatTwoLabel">Image Time</span>
               </div>
             </div>
 
-            <a href="#contact" class="btn btn-primary practice-tests-cta" id="practiceTestCta">Begin Test →</a>
+            <a href="#contact" class="btn btn-primary" id="practiceTestCta">Begin Test →</a>
           </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="about" class="section">
+      <div class="container">
+        <span class="section-label">About SSB Catalyst</span>
+        <div class="about-grid">
+          <article class="about-card card">
+            <h2 class="section-title">We prepare candidates to understand what the board observes and how to show it naturally.</h2>
+            <p class="section-copy">At SSB Catalyst, training is built around behavior, not shortcuts. Our model helps aspirants understand how officers are assessed in real board situations and how to communicate confidence without sounding rehearsed.</p>
+            <p class="section-copy" style="margin-top: 12px;">From PPDT narration to interview expression, every module is structured for clarity, honest feedback, and practical correction. The focus remains on consistency, OLQ alignment, and confidence under pressure.</p>
+          </article>
+
+          <article class="mentor-card card">
+            <div class="avatar-lg">PS</div>
+            <div class="mentor-heading">
+              <h3>Prashant Saxena</h3>
+              <p>Founder &amp; Lead Mentor · AIR 12 · 28 Attempts</p>
+            </div>
+            <p class="mentor-quote">"I mentor candidates through mistakes I personally made and eventually fixed."</p>
+            <ul class="check-list">
+              <li><i class="fa-solid fa-check"></i><span>Screening Strategies (OIR &amp; PPDT)</span></li>
+              <li><i class="fa-solid fa-check"></i><span>Psychology Tips</span></li>
+              <li><i class="fa-solid fa-check"></i><span>GTO Techniques</span></li>
+              <li><i class="fa-solid fa-check"></i><span>Repeater-Specific Guidance</span></li>
+              <li><i class="fa-solid fa-check"></i><span>Interview Hacks</span></li>
+            </ul>
+            <div class="social-row">
+              <a href="https://t.me/ssbcatalyst" target="_blank" rel="noopener noreferrer" class="social-pill" aria-label="Telegram"><i class="fa-brands fa-telegram"></i> Telegram</a>
+              <a href="https://www.instagram.com/ssbcatalyst?igsh=MTNjY3JqcmgyNTJwOQ==" target="_blank" rel="noopener noreferrer" class="social-pill" aria-label="Instagram"><i class="fa-brands fa-instagram"></i> Instagram</a>
+              <a href="https://www.youtube.com/@ssbcatalyst" target="_blank" rel="noopener noreferrer" class="social-pill" aria-label="YouTube"><i class="fa-brands fa-youtube"></i> YouTube</a>
+            </div>
+          </article>
         </div>
       </div>
     </section>
 
     <section id="results" class="section">
       <div class="container">
-        <div class="results-head">
-          <h2>Use this section for your real numbers, selections, and student wins</h2>
+        <span class="section-label">Results</span>
+        <h2 class="section-title">Use this section for your real numbers, selections, and student wins</h2>
+        <div class="stats-grid" style="margin-top: 22px;">
+          <div class="stat-box card"><span class="stat-value">15+</span><span class="stat-label">Students guided</span></div>
+          <div class="stat-box card"><span class="stat-value">7</span><span class="stat-label">Students recommended</span></div>
+          <div class="stat-box card"><span class="stat-value">1:1</span><span class="stat-label">Personalized feedback</span></div>
+          <div class="stat-box card"><span class="stat-value">28</span><span class="stat-label">Mentor's attempts</span></div>
         </div>
 
-        <div class="stats-grid">
-          <div class="stat card"><strong>15</strong><span>Students guided</span></div>
-          <div class="stat card"><strong>7</strong><span>Students recommended</span></div>
-          <div class="stat card"><strong>1:1</strong><span>Personalized feedback</span></div>
-          <div class="stat card"><strong>Daily</strong><span>OLQ &amp; GTO refinement</span></div>
+        <div class="testimonial-grid" style="margin-top: 22px;">
+          <article class="quote-card card">
+            <div class="quote-mark">“</div>
+            <p>I stopped guessing what the board wants and learned how to present my true personality with confidence.</p>
+            <div class="stars" aria-label="5 star rating">
+              <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+            </div>
+            <div class="quote-footer"><span class="quote-name">Aditya</span><span class="recommended-badge">Recommended</span></div>
+          </article>
+          <article class="quote-card card">
+            <div class="quote-mark">“</div>
+            <p>The mock reviews were brutally honest and that changed everything in my screening and interview.</p>
+            <div class="stars" aria-label="5 star rating">
+              <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+            </div>
+            <div class="quote-footer"><span class="quote-name">Apoorva</span><span class="recommended-badge">Recommended</span></div>
+          </article>
+          <article class="quote-card card">
+            <div class="quote-mark">“</div>
+            <p>The process gave me structure, calmness, and a measurable improvement in communication and OLQs.</p>
+            <div class="stars" aria-label="5 star rating">
+              <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+            </div>
+            <div class="quote-footer"><span class="quote-name">Ashish</span><span class="recommended-badge">Recommended</span></div>
+          </article>
         </div>
+      </div>
+    </section>
 
-        <div class="testimonial-grid">
-          <blockquote>"I stopped guessing what the board wants and learned how to present my true personality with confidence."</blockquote>
-          <blockquote>"The mock reviews were brutally honest and that changed everything in my screening and interview."</blockquote>
-          <blockquote>"The process gave me structure, calmness, and a measurable improvement in communication and OLQs."</blockquote>
+    <section class="section" id="mentors">
+      <div class="container">
+        <span class="section-label">Leadership</span>
+        <h2 class="section-title">Prashant Saxena</h2>
+        <div class="journey-card" style="margin-top: 22px;">
+          <article class="mentor-card card" style="padding: 18px; grid-template-columns: auto 1fr; display: grid; align-items: center; gap: 16px;">
+            <div class="avatar-lg">PS</div>
+            <div>
+              <h3 style="font-size: 1rem; font-weight: 800; margin-bottom: 6px;">Founder &amp; Lead Mentor</h3>
+              <p class="section-copy">AIR 12 · 28 Attempts</p>
+            </div>
+          </article>
         </div>
       </div>
     </section>
 
     <section class="section">
       <div class="container">
-        <h2>Real faces, real journeys</h2>
-        <div class="stories-grid">
-          <article class="student-card card">
-            <div class="avatar">A</div>
-            <h3>Aditya</h3>
-            <div class="student-entry">NDA • Recommended</div>
-            <div class="student-year">2023 Batch</div>
-            <p class="student-testimonial">"PPDT structure and speaking under pressure became much clearer."</p>
-          </article>
-          <article class="student-card card">
-            <div class="avatar">A</div>
-            <h3>Apoorva</h3>
-            <div class="student-entry">CDS • Recommended</div>
-            <div class="student-year">2023 Batch</div>
-            <p class="student-testimonial">"I focused on OLQ alignment instead of memorizing lines."</p>
-          </article>
-          <article class="student-card card">
-            <div class="avatar">A</div>
-            <h3>Ashish</h3>
-            <div class="student-entry">NDA • Recommended</div>
-            <div class="student-year">2024 Batch</div>
-            <p class="student-testimonial">"Intense mock interviews helped me answer with confidence and logic."</p>
-          </article>
-          <article class="student-card card">
-            <div class="avatar">C</div>
-            <h3>Chitra</h3>
-            <div class="student-entry">AFCAT • Recommended</div>
-            <div class="student-year">2024 Batch</div>
-            <p class="student-testimonial">"Psychology practice felt practical and easy to improve daily."</p>
-          </article>
-          <article class="student-card card">
-            <div class="avatar">M</div>
-            <h3>Mridul</h3>
-            <div class="student-entry">CDS • Recommended</div>
-            <div class="student-year">2024 Batch</div>
-            <p class="student-testimonial">"GTO tasks with calmness was my biggest shift."</p>
-          </article>
-          <article class="student-card card">
-            <div class="avatar">P</div>
-            <h3>Parakram</h3>
-            <div class="student-entry">SSC Tech • Recommended</div>
-            <div class="student-year">2024 Batch</div>
-            <p class="student-testimonial">"Screening drills and narration practice gave me a real edge."</p>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <section id="mentors" class="section">
-      <div class="container">
-        <h2>Leadership </h2>
-        <div class="mentor-grid">
-          <article class="mentor-panel card">
-            <div class="avatar">PS</div>
-            <h3>Prashant Saxena</h3>
-            <p>Founder &amp; Lead Mentor | AIR 12 | 28 Attempts</p>
-          </article>
-
-        </div>
-      </div>
-    </section>
-
-    <section class="section">
-      <div class="container">
-        <h2>A simple journey from inquiry to final readiness</h2>
-        <div class="timeline">
-          <article class="timeline-step card">
-            <h3>1. Book Counselling</h3>
-            <p>Candidate shares entry type, strengths, weak areas, timeline.</p>
-          </article>
-          <article class="timeline-step card">
-            <h3>2. Join Training</h3>
-            <p>Structured sessions for screening, psychology, GTO, interview.</p>
-          </article>
-          <article class="timeline-step card">
-            <h3>3. Practice &amp; Review</h3>
-            <p>Mock assessments and direct feedback.</p>
-          </article>
-          <article class="timeline-step card">
-            <h3>4. Face The Board</h3>
-            <p>Reach SSB with clarity, composure, and readiness.</p>
-          </article>
+        <span class="section-label">Journey</span>
+        <h2 class="section-title">A simple journey from inquiry to final readiness</h2>
+        <div class="journey-card" style="margin-top: 22px;">
+          <div class="timeline">
+            <article class="timeline-step">
+              <h3>Book Counselling</h3>
+              <p>Candidate shares entry type, strengths, weak areas, timeline.</p>
+            </article>
+            <article class="timeline-step">
+              <h3>Join Training</h3>
+              <p>Structured sessions for screening, psychology, GTO, interview.</p>
+            </article>
+            <article class="timeline-step">
+              <h3>Practice &amp; Review</h3>
+              <p>Mock assessments and direct feedback.</p>
+            </article>
+            <article class="timeline-step">
+              <h3>Face The Board</h3>
+              <p>Reach SSB with clarity, composure, and readiness.</p>
+            </article>
+          </div>
         </div>
       </div>
     </section>
 
     <section id="faq" class="section">
       <div class="container">
-        <h2>Short, clear answers that help remove hesitation before inquiry</h2>
-
-        <div class="faq-wrap">
-          <article class="faq-item active">
-            <button class="faq-btn" type="button">Who is this coaching for?<i class="fa-solid fa-chevron-down"></i></button>
-            <div class="faq-content">
+        <span class="section-label">FAQ</span>
+        <h2 class="section-title">Short, clear answers that help remove hesitation before inquiry</h2>
+        <div class="results-grid" style="margin-top: 22px;">
+          <article class="quote-card card faq-item active">
+            <button class="faq-btn" type="button" style="width: 100%; background: transparent; border: 0; padding: 0; display: flex; align-items: center; justify-content: space-between; text-align: left; cursor: pointer;">
+              <span>Who is this coaching for?</span>
+              <i class="fa-solid fa-chevron-down"></i>
+            </button>
+            <div class="faq-content" style="margin-top: 12px; color: var(--text2);">
               <p>This coaching is designed for NDA, CDS, AFCAT, TES, SSC Tech aspirants.</p>
             </div>
           </article>
-
-          <article class="faq-item">
-            <button class="faq-btn" type="button">Can beginners join?<i class="fa-solid fa-chevron-down"></i></button>
-            <div class="faq-content">
+          <article class="quote-card card faq-item">
+            <button class="faq-btn" type="button" style="width: 100%; background: transparent; border: 0; padding: 0; display: flex; align-items: center; justify-content: space-between; text-align: left; cursor: pointer;">
+              <span>Can beginners join?</span>
+              <i class="fa-solid fa-chevron-down"></i>
+            </button>
+            <div class="faq-content" style="margin-top: 12px; color: var(--text2);">
               <p>Yes. The model supports both first-timers and repeaters with practical progression.</p>
             </div>
           </article>
-
-          <article class="faq-item">
-            <button class="faq-btn" type="button">Do you offer mock interviews and psychology guidance?<i class="fa-solid fa-chevron-down"></i></button>
-            <div class="faq-content">
+          <article class="quote-card card faq-item">
+            <button class="faq-btn" type="button" style="width: 100%; background: transparent; border: 0; padding: 0; display: flex; align-items: center; justify-content: space-between; text-align: left; cursor: pointer;">
+              <span>Do you offer mock interviews and psychology guidance?</span>
+              <i class="fa-solid fa-chevron-down"></i>
+            </button>
+            <div class="faq-content" style="margin-top: 12px; color: var(--text2);">
               <p>Yes. Both mock interview and psychology guidance are core parts of the training flow.</p>
             </div>
           </article>
@@ -1484,11 +1688,20 @@
     </section>
 
     <section id="contact" class="section">
-      <div class="container contact-grid">
-        <article class="form-card card">
-          <h2>Student Inquiry Form</h2>
-          <p>Use the quick contact options below, or send a short message through the form.</p>
-          <div id="formMessage" style="display: none; padding: 1rem; border-radius: 8px; margin-bottom: 1rem;" role="alert"></div>
+      <div class="container">
+        <div class="form-card contact-card">
+          <span class="section-label">Contact</span>
+          <h2 class="section-title">Student Inquiry Form</h2>
+          <p class="section-copy">Use the quick contact options below, or send a short message through the form.</p>
+
+            <p class="contact-direct-note">Or reach us directly:</p>
+            <div class="contact-direct-row" aria-label="Quick contact buttons">
+              <a href="tel:+919711414096"><i class="ti ti-phone" aria-hidden="true"></i> Call Us</a>
+              <a href="mailto:ssbcatalyst@gmail.com"><i class="ti ti-mail" aria-hidden="true"></i> Email Us</a>
+              <a href="https://wa.me/919711414096" target="_blank" rel="noopener" class="contact-whatsapp"><i class="ti ti-brand-whatsapp" aria-hidden="true"></i> WhatsApp</a>
+            </div>
+
+          <div class="form-message" id="formMessage" role="alert"></div>
 
           <form id="contactForm">
             <div class="form-grid">
@@ -1498,11 +1711,11 @@
               <div class="field">
                 <input type="email" name="email" aria-label="Your Email" placeholder="Your Email" required />
               </div>
-              <div class="field">
+              <div class="field field-full">
                 <input type="tel" name="phone" aria-label="Your Phone Number" placeholder="Your Phone Number" />
               </div>
               <input type="text" name="honeypot" style="display:none" tabindex="-1" autocomplete="off" aria-hidden="true" />
-              <div class="field form-full-width">
+              <div class="field field-full">
                 <textarea name="message" aria-label="Your Message" placeholder="Your Message"></textarea>
               </div>
             </div>
@@ -1511,92 +1724,160 @@
               <button type="submit" class="btn btn-primary" id="submitBtn">Send Inquiry</button>
             </div>
           </form>
-        </article>
-
-        <aside class="cta-banner card">
-          <div>
-            <h2>Ready to turn interest into inquiries for SSB Catalyst?</h2>
-            <p>Email: <a class="email-link" href="mailto:ssbcatalyst@gmail.com" title="Send email">ssbcatalyst@gmail.com</a></p>
-            <p>Phone: <a class="phone-link" href="tel:+919711414096" title="Call us">9711414096</a></p>
-          </div>
-
-          <div class="cta-actions">
-            <a class="btn btn-primary" href="https://wa.me/919711414096?text=Hello%2C%20I%20want%20to%20know%20more%20about%20SSB%20Catalyst" target="_blank" rel="noopener noreferrer" title="Chat on WhatsApp"><i class="fab fa-whatsapp"></i> WhatsApp</a>
-            <a class="btn btn-outline" href="./admin/dashboard.html" title="Admin Dashboard"><i class="fas fa-lock"></i> Admin</a>
-          </div>
-        </aside>
+        </div>
       </div>
     </section>
   </main>
 
-  <footer>
-    <div class="container footer-row">
-      <div class="brand">
-        <span class="brand-title">SSB CATALYST</span>
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-main">
+        <div class="brand">
+          <span class="brand-title">SSB CATALYST</span>
+          <span class="brand-tagline">Clarity · Confidence · Recommendation</span>
+        </div>
+
+        <nav class="footer-links" aria-label="Footer navigation">
+          <a href="#about">About</a>
+          <a href="#programs">Programs</a>
+          <a href="#results">Results</a>
+          <a href="#mentors">Mentors</a>
+          <a href="#faq">FAQ</a>
+        </nav>
+
+        <div class="footer-social" aria-label="Social links">
+          <a href="https://t.me/ssbcatalyst" target="_blank" rel="noopener noreferrer" aria-label="Telegram"><i class="fa-brands fa-telegram"></i></a>
+          <a href="https://www.instagram.com/ssbcatalyst?igsh=MTNjY3JqcmgyNTJwOQ==" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+          <a href="https://www.youtube.com/@ssbcatalyst" target="_blank" rel="noopener noreferrer" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
+        </div>
       </div>
-      <small>&copy; 2026 SSB Catalyst. All rights reserved.</small>
+
+      <div class="footer-bottom">
+        <small>&copy; 2026 SSB Catalyst. All rights reserved.</small>
+      </div>
     </div>
   </footer>
+
+  <a
+    href="https://wa.me/919711414096"
+    target="_blank"
+    rel="noopener"
+    aria-label="Chat on WhatsApp"
+    class="whatsapp-float"
+  >
+    <span class="whatsapp-tooltip">Chat with us</span>
+    <i class="ti ti-brand-whatsapp" aria-hidden="true"></i>
+  </a>
 
   <script>
     const practiceTestData = {
       ppdt: {
-        tag: "Psychological Test",
-        title: "Picture Perception & Description Test",
-        description: "View a hazy image for 30 seconds, write a short story, then narrate it in a group. Tests imagination, leadership cues, and positive thinking.",
+        tag: 'PSYCHOLOGICAL TEST',
+        title: 'Picture Perception & Description Test',
+        description: 'View a hazy image for 30 seconds, write a short story, then narrate it in a group.',
         stats: [
-          { value: "12", label: "Practice Sets" },
-          { value: "30s", label: "Image Time" }
+          { value: '12', label: 'Practice Sets' },
+          { value: '30s', label: 'Image Time' }
         ]
       },
       tat: {
-        tag: "Psychological Test",
-        title: "Thematic Apperception Test",
-        description: "Write a meaningful story from a picture prompt. Reveals personality traits, motivation patterns, and social perception under assessment.",
+        tag: 'PSYCHOLOGICAL TEST',
+        title: 'Thematic Apperception Test',
+        description: 'Write a meaningful story from a picture prompt. Reveals personality traits, motivation patterns, and social perception under assessment.',
         stats: [
-          { value: "20", label: "Practice Sets" },
-          { value: "4 min", label: "Per Story" }
+          { value: '20', label: 'Practice Sets' },
+          { value: '4 min', label: 'Per Story' }
         ]
       },
       wat: {
-        tag: "Written Test",
-        title: "Word Association Test",
-        description: "60 words shown one by one — write the first sentence that comes to mind. Timed strictly at 15 seconds per word.",
+        tag: 'WRITTEN TEST',
+        title: 'Word Association Test',
+        description: '60 words shown one by one — write the first sentence that comes to mind. Timed strictly at 15 seconds per word.',
         stats: [
-          { value: "60", label: "Words" },
-          { value: "15s", label: "Per Word" }
+          { value: '60', label: 'Words' },
+          { value: '15s', label: 'Per Word' }
         ]
       },
       srt: {
-        tag: "Situational Test",
-        title: "Situation Reaction Test",
-        description: "React to 60 real-life situations in writing. Tests practical intelligence, emotional balance, and officer-like qualities.",
+        tag: 'SITUATIONAL TEST',
+        title: 'Situation Reaction Test',
+        description: 'React to 60 real-life situations in writing. Tests practical intelligence, emotional balance, and officer-like qualities.',
         stats: [
-          { value: "60", label: "Situations" },
-          { value: "30 min", label: "Total" }
+          { value: '60', label: 'Situations' },
+          { value: '30 min', label: 'Total' }
         ]
       },
       sd: {
-        tag: "Self Assessment",
-        title: "Self Description Practice",
-        description: "Write what your parents, friends, teachers, and you think about yourself. Guided prompts build an authentic, consistent self-description.",
+        tag: 'SELF ASSESSMENT',
+        title: 'Self Description Practice',
+        description: 'Write what your parents, friends, teachers, and you think about yourself. Guided prompts build an authentic, consistent self-description.',
         stats: [
-          { value: "5", label: "Perspectives" },
-          { value: "Guided", label: "Format" }
+          { value: '5', label: 'Perspectives' },
+          { value: 'Guided', label: 'Format' }
         ]
       }
     };
 
+    const themeToggle = document.getElementById('themeToggle');
+    const navPanel = document.getElementById('navPanel');
+    const menuToggle = document.getElementById('menuToggle');
+    const menuBackdrop = document.getElementById('menuBackdrop');
+    const form = document.getElementById('contactForm');
+    const formMessage = document.getElementById('formMessage');
+    const submitBtn = document.getElementById('submitBtn');
+
     const practicePanel = {
-      tag: document.getElementById("practiceTestTag"),
-      title: document.getElementById("practiceTestTitle"),
-      description: document.getElementById("practiceTestDescription"),
-      statOneValue: document.getElementById("practiceTestStatOneValue"),
-      statOneLabel: document.getElementById("practiceTestStatOneLabel"),
-      statTwoValue: document.getElementById("practiceTestStatTwoValue"),
-      statTwoLabel: document.getElementById("practiceTestStatTwoLabel"),
-      buttons: Array.from(document.querySelectorAll(".practice-test-item"))
+      tag: document.getElementById('practiceTestTag'),
+      title: document.getElementById('practiceTestTitle'),
+      description: document.getElementById('practiceTestDescription'),
+      statOneValue: document.getElementById('practiceTestStatOneValue'),
+      statOneLabel: document.getElementById('practiceTestStatOneLabel'),
+      statTwoValue: document.getElementById('practiceTestStatTwoValue'),
+      statTwoLabel: document.getElementById('practiceTestStatTwoLabel'),
+      buttons: Array.from(document.querySelectorAll('.practice-tab'))
     };
+
+    function applyTheme(theme) {
+      if (theme === 'dark') {
+        document.documentElement.setAttribute('data-theme', 'dark');
+        localStorage.setItem('ssb-theme', 'dark');
+      } else {
+        document.documentElement.removeAttribute('data-theme');
+        localStorage.setItem('ssb-theme', 'light');
+      }
+
+      const icon = themeToggle.querySelector('i');
+      icon.className = theme === 'dark' ? 'fa-solid fa-sun' : 'fa-solid fa-moon';
+      themeToggle.setAttribute('aria-label', theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode');
+    }
+
+    const savedTheme = localStorage.getItem('ssb-theme');
+    applyTheme(savedTheme === 'dark' ? 'dark' : 'light');
+
+    themeToggle.addEventListener('click', () => {
+      const nextTheme = document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+      applyTheme(nextTheme);
+    });
+
+    function setMenuOpen(isOpen) {
+      navPanel.classList.toggle('open', isOpen);
+      menuBackdrop.classList.toggle('show', isOpen);
+      menuToggle.setAttribute('aria-expanded', String(isOpen));
+      menuToggle.innerHTML = isOpen ? '<i class="fa-solid fa-xmark"></i>' : '<i class="fa-solid fa-bars"></i>';
+    }
+
+    menuToggle.addEventListener('click', () => {
+      setMenuOpen(!navPanel.classList.contains('open'));
+    });
+
+    menuBackdrop.addEventListener('click', () => setMenuOpen(false));
+    navPanel.querySelectorAll('a').forEach((link) => {
+      link.addEventListener('click', () => {
+        if (window.innerWidth <= 768) {
+          setMenuOpen(false);
+        }
+      });
+    });
 
     function setPracticeTest(testKey) {
       const selected = practiceTestData[testKey] || practiceTestData.ppdt;
@@ -1611,24 +1892,82 @@
 
       practicePanel.buttons.forEach((button) => {
         const isActive = button.dataset.test === testKey;
-        button.classList.toggle("active", isActive);
-        button.setAttribute("aria-selected", String(isActive));
+        button.classList.toggle('active', isActive);
+        button.setAttribute('aria-selected', String(isActive));
       });
     }
 
     practicePanel.buttons.forEach((button) => {
-      button.addEventListener("click", () => setPracticeTest(button.dataset.test));
+      button.addEventListener('click', () => setPracticeTest(button.dataset.test));
     });
 
-    setPracticeTest("ppdt");
+    setPracticeTest('ppdt');
+
+    document.querySelectorAll('.faq-item').forEach((item) => {
+      const trigger = item.querySelector('.faq-btn');
+      const content = item.querySelector('.faq-content');
+
+      content.style.display = item.classList.contains('active') ? 'block' : 'none';
+
+      trigger.addEventListener('click', () => {
+        const shouldOpen = !item.classList.contains('active');
+        document.querySelectorAll('.faq-item').forEach((otherItem) => {
+          otherItem.classList.remove('active');
+          const otherContent = otherItem.querySelector('.faq-content');
+          if (otherContent) {
+            otherContent.style.display = 'none';
+          }
+        });
+
+        if (shouldOpen) {
+          item.classList.add('active');
+          content.style.display = 'block';
+        }
+      });
+    });
+
+    form.addEventListener('submit', async (event) => {
+      event.preventDefault();
+
+      const formData = new FormData(form);
+      const payload = Object.fromEntries(formData.entries());
+
+      if (!payload.name || !payload.email) {
+        formMessage.textContent = 'Please add your name and email before sending.';
+        formMessage.style.display = 'block';
+        return;
+      }
+
+      submitBtn.disabled = true;
+      submitBtn.textContent = 'Sending...';
+      formMessage.style.display = 'none';
+
+      try {
+        if (window.location.protocol !== 'file:') {
+          const response = await fetch('/contact', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(payload)
+          });
+
+          if (!response.ok) {
+            throw new Error('Request failed');
+          }
+        }
+
+        form.reset();
+        formMessage.textContent = 'Inquiry sent. We will contact you shortly.';
+        formMessage.style.display = 'block';
+      } catch (error) {
+        formMessage.textContent = 'Unable to send right now. Please use email or WhatsApp instead.';
+        formMessage.style.display = 'block';
+      } finally {
+        submitBtn.disabled = false;
+        submitBtn.textContent = 'Send Inquiry';
+      }
+    });
   </script>
-  <script>
-    window.EMAILJS_SERVICE_ID = "YOUR_SERVICE_ID";
-    window.EMAILJS_TEMPLATE_ID = "YOUR_TEMPLATE_ID";
-    window.EMAILJS_PUBLIC_KEY = "YOUR_PUBLIC_KEY";
-  </script>
-  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
-  <script src="./js/main.js" defer></script>
 </body>
 </html>
-
