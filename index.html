@@ -756,7 +756,20 @@
       padding: 14px 16px;
       cursor: pointer;
       font-weight: 600;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
       transition: background-color 0.25s ease, color 0.25s ease, border-color 0.25s ease;
+    }
+
+    .practice-tab-count {
+      font-size: 9px;
+      font-weight: 800;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--text3);
+      white-space: nowrap;
     }
 
     .practice-tab.active {
@@ -816,6 +829,652 @@
       color: var(--text3);
       letter-spacing: 0.08em;
       text-transform: uppercase;
+    }
+
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border: 0;
+    }
+
+    .practice-panel-head {
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+      align-items: flex-start;
+    }
+
+    .practice-controls {
+      display: grid;
+      gap: 10px;
+      min-width: min(100%, 320px);
+    }
+
+    .practice-input,
+    .practice-select {
+      width: 100%;
+      min-height: 44px;
+      padding: 0 14px;
+      border-radius: 12px;
+      border: 0.5px solid var(--border);
+      background: var(--bg2);
+      color: var(--text);
+    }
+
+    .practice-input::placeholder {
+      color: var(--text3);
+    }
+
+    .practice-summary {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    .practice-meta-card {
+      padding: 14px 16px;
+      border-radius: 14px;
+      border: 0.5px solid var(--border);
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.04), transparent);
+      display: grid;
+      gap: 4px;
+    }
+
+    .practice-meta-card strong {
+      font-size: 1.25rem;
+      font-weight: 800;
+      color: var(--accent);
+      line-height: 1;
+    }
+
+    .practice-meta-card span {
+      font-size: 10px;
+      font-weight: 700;
+      color: var(--text3);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .practice-detail {
+      display: grid;
+      gap: 14px;
+      border-radius: 16px;
+      padding: 18px;
+      border: 0.5px solid rgba(14, 165, 233, 0.18);
+      background: linear-gradient(135deg, rgba(14, 165, 233, 0.08), rgba(15, 23, 42, 0.02));
+    }
+
+    .practice-detail__top {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      align-items: flex-start;
+    }
+
+    .practice-detail__eyebrow {
+      font-size: 9px;
+      font-weight: 800;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--accenttext);
+    }
+
+    .practice-detail__title {
+      font-size: 1.15rem;
+      font-weight: 800;
+      margin-top: 4px;
+    }
+
+    .practice-detail__description {
+      color: var(--text2);
+      max-width: 70ch;
+    }
+
+    .practice-detail__grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 10px;
+    }
+
+    .practice-detail__metric {
+      border-radius: 12px;
+      border: 0.5px solid var(--border);
+      padding: 12px;
+      background: rgba(255, 255, 255, 0.02);
+      display: grid;
+      gap: 4px;
+    }
+
+    .practice-detail__metric strong {
+      font-size: 1rem;
+      font-weight: 800;
+    }
+
+    .practice-detail__metric span {
+      font-size: 10px;
+      font-weight: 700;
+      color: var(--text3);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .practice-detail__actions {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+
+    .practice-route-label {
+      font-size: 11px;
+      color: var(--text3);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .practice-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 14px;
+    }
+
+    .practice-set-card {
+      position: relative;
+      display: grid;
+      gap: 14px;
+      padding: 16px;
+      border: 0.5px solid var(--border);
+      border-radius: 16px;
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.03), rgba(255, 255, 255, 0.01));
+      overflow: hidden;
+      transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+    }
+
+    .practice-set-card::before {
+      content: "";
+      position: absolute;
+      inset: 0 0 auto;
+      height: 3px;
+      background: linear-gradient(90deg, var(--accent), var(--accent2));
+      opacity: 0.85;
+    }
+
+    .practice-set-card:hover {
+      transform: translateY(-4px);
+      border-color: rgba(14, 165, 233, 0.35);
+      box-shadow: 0 14px 32px rgba(15, 23, 42, 0.12);
+    }
+
+    .practice-set-card.is-active {
+      border-color: rgba(14, 165, 233, 0.5);
+      box-shadow: 0 0 0 1px rgba(14, 165, 233, 0.12), 0 18px 36px rgba(15, 23, 42, 0.14);
+    }
+
+    .practice-set-card__thumb {
+      min-height: 104px;
+      border-radius: 12px;
+      padding: 14px;
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      color: #fff;
+      background: linear-gradient(135deg, var(--thumb-start), var(--thumb-end));
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.12);
+    }
+
+    .practice-set-card__thumb span {
+      font-size: 0.72rem;
+      font-weight: 800;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+    }
+
+    .practice-set-card__body {
+      display: grid;
+      gap: 12px;
+    }
+
+    .practice-set-card__header {
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+      align-items: flex-start;
+    }
+
+    .practice-set-card__header h4 {
+      font-size: 1rem;
+      font-weight: 800;
+      line-height: 1.25;
+    }
+
+    .practice-set-card__description {
+      color: var(--text2);
+      font-size: 0.95rem;
+      min-height: 3.2em;
+    }
+
+    .practice-set-card__meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .practice-set-card__meta span,
+    .practice-set-card__route {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--text3);
+    }
+
+    .practice-set-card__footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .practice-set-card__footer .btn {
+      min-width: 132px;
+      justify-content: center;
+    }
+
+    .practice-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 7px 10px;
+      border-radius: 999px;
+      border: 0.5px solid var(--border);
+      background: rgba(255, 255, 255, 0.03);
+      color: var(--text2);
+      font-size: 9px;
+      font-weight: 800;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+
+    .practice-badge--success {
+      border-color: var(--successborder);
+      background: var(--successbg);
+      color: var(--successtext);
+    }
+
+    .practice-empty {
+      padding: 18px;
+      border: 0.5px dashed var(--border);
+      border-radius: 14px;
+      color: var(--text2);
+      background: rgba(255, 255, 255, 0.02);
+    }
+
+    .practice-home-empty,
+    .practice-home-view {
+      display: grid;
+      gap: 14px;
+      animation: practiceFadeIn 0.28s ease;
+    }
+
+    .practice-home-empty[hidden],
+    .practice-home-view[hidden] {
+      display: none !important;
+    }
+
+    .practice-category-section {
+      display: grid;
+      gap: 12px;
+      padding: 14px;
+      border: 0.5px solid var(--border);
+      border-radius: 16px;
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.03), rgba(255, 255, 255, 0.01));
+      margin-bottom: 12px;
+    }
+
+    .practice-category-section.is-active {
+      border-color: rgba(14, 165, 233, 0.35);
+      box-shadow: 0 14px 28px rgba(15, 23, 42, 0.08);
+    }
+
+    .practice-category-section__header {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      align-items: center;
+      cursor: pointer;
+    }
+
+    .practice-category-section__summary {
+      display: grid;
+      gap: 4px;
+    }
+
+    .practice-category-section__summary strong {
+      font-size: 0.95rem;
+      font-weight: 800;
+    }
+
+    .practice-category-section__summary span {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--text3);
+    }
+
+    .practice-category-section__content {
+      display: grid;
+      gap: 14px;
+      max-height: 0;
+      overflow: hidden;
+      opacity: 0;
+      transform: translateY(-6px);
+      transition: max-height 0.32s ease, opacity 0.24s ease, transform 0.24s ease;
+    }
+
+    .practice-category-section.is-active .practice-category-section__content {
+      max-height: 2500px;
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .practice-session-shell {
+      min-height: 100vh;
+      background:
+        radial-gradient(circle at top left, rgba(56, 189, 248, 0.16), transparent 30%),
+        radial-gradient(circle at top right, rgba(16, 185, 129, 0.12), transparent 24%),
+        linear-gradient(180deg, rgba(15, 23, 42, 0.98), rgba(2, 6, 23, 1));
+      color: #e2e8f0;
+      padding: 18px;
+    }
+
+    .practice-session-shell__card {
+      width: min(1280px, calc(100% - 0px));
+      margin: 0 auto;
+      border: 0.5px solid rgba(148, 163, 184, 0.18);
+      border-radius: 24px;
+      background: rgba(15, 23, 42, 0.78);
+      backdrop-filter: blur(16px);
+      box-shadow: 0 24px 70px rgba(2, 6, 23, 0.35);
+      overflow: hidden;
+    }
+
+    .practice-session-topbar {
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      align-items: center;
+      padding: 16px 18px;
+      border-bottom: 0.5px solid rgba(148, 163, 184, 0.18);
+      background: rgba(2, 6, 23, 0.55);
+    }
+
+    .practice-session-topbar__left,
+    .practice-session-topbar__right {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .practice-session-topbar__title {
+      display: grid;
+      gap: 2px;
+    }
+
+    .practice-session-topbar__title strong {
+      font-size: 0.98rem;
+      font-weight: 800;
+    }
+
+    .practice-session-topbar__title span,
+    .practice-session-chip,
+    .practice-session-back {
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: #94a3b8;
+    }
+
+    .practice-session-back {
+      color: #e2e8f0;
+      background: transparent;
+      border: 0.5px solid rgba(148, 163, 184, 0.18);
+      border-radius: 999px;
+      padding: 10px 14px;
+      cursor: pointer;
+    }
+
+    .practice-session-shell__body {
+      display: grid;
+      gap: 18px;
+      padding: 18px;
+    }
+
+    .practice-session-layout {
+      display: grid;
+      grid-template-columns: minmax(0, 1.6fr) minmax(300px, 0.9fr);
+      gap: 18px;
+    }
+
+    .practice-session-card {
+      border: 0.5px solid rgba(148, 163, 184, 0.18);
+      border-radius: 20px;
+      background: rgba(15, 23, 42, 0.82);
+      padding: 18px;
+    }
+
+    .practice-session-card--wide {
+      min-height: 640px;
+    }
+
+    .practice-session-card__header {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      align-items: flex-start;
+      margin-bottom: 14px;
+    }
+
+    .practice-session-card__header h2 {
+      font-size: 1.2rem;
+      font-weight: 800;
+      margin-top: 2px;
+    }
+
+    .practice-session-card__sub {
+      color: #94a3b8;
+      font-size: 0.94rem;
+      max-width: 70ch;
+    }
+
+    .practice-session-grid {
+      display: grid;
+      gap: 16px;
+    }
+
+    .practice-mode-frame {
+      border-radius: 18px;
+      border: 0.5px solid rgba(148, 163, 184, 0.18);
+      background: linear-gradient(180deg, rgba(15, 23, 42, 0.92), rgba(2, 6, 23, 0.95));
+      padding: 18px;
+      display: grid;
+      gap: 14px;
+    }
+
+    .practice-mode-visual {
+      min-height: 280px;
+      border-radius: 18px;
+      border: 0.5px solid rgba(148, 163, 184, 0.18);
+      background: radial-gradient(circle at top, rgba(56, 189, 248, 0.18), rgba(15, 23, 42, 0.6));
+      display: grid;
+      place-items: center;
+      padding: 18px;
+      text-align: center;
+    }
+
+    .practice-mode-visual__badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 12px;
+      border-radius: 999px;
+      background: rgba(14, 165, 233, 0.12);
+      border: 0.5px solid rgba(14, 165, 233, 0.28);
+      color: #7dd3fc;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      font-size: 10px;
+      font-weight: 800;
+    }
+
+    .practice-mode-image {
+      width: min(100%, 520px);
+      aspect-ratio: 4 / 3;
+      border-radius: 22px;
+      border: 0.5px solid rgba(255, 255, 255, 0.08);
+      background-size: cover;
+      background-position: center;
+      box-shadow: inset 0 0 0 999px rgba(2, 6, 23, 0.42);
+      display: grid;
+      align-items: end;
+      padding: 18px;
+      text-align: left;
+    }
+
+    .practice-mode-image__caption,
+    .practice-word,
+    .practice-situation {
+      font-size: clamp(1.4rem, 3vw, 2rem);
+      font-weight: 800;
+      line-height: 1.2;
+    }
+
+    .practice-mode-image__hint {
+      margin-top: 8px;
+      color: #cbd5e1;
+      font-size: 0.92rem;
+      max-width: 46ch;
+    }
+
+    .practice-session-controls {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+
+    .practice-session-progressbar {
+      height: 10px;
+      border-radius: 999px;
+      overflow: hidden;
+      background: rgba(148, 163, 184, 0.14);
+      border: 0.5px solid rgba(148, 163, 184, 0.18);
+    }
+
+    .practice-session-progressbar__fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--accent), var(--accent2));
+      transition: width 0.25s ease;
+    }
+
+    .practice-session-note {
+      color: #94a3b8;
+      font-size: 0.92rem;
+    }
+
+    .practice-session-input,
+    .practice-session-textarea,
+    .practice-session-select {
+      width: 100%;
+      border-radius: 14px;
+      border: 0.5px solid rgba(148, 163, 184, 0.18);
+      background: rgba(2, 6, 23, 0.72);
+      color: #e2e8f0;
+      padding: 12px 14px;
+      min-height: 46px;
+    }
+
+    .practice-session-textarea {
+      min-height: 180px;
+      resize: vertical;
+    }
+
+    .practice-session-summary {
+      display: grid;
+      gap: 14px;
+    }
+
+    .practice-session-summary__card {
+      border: 0.5px solid rgba(148, 163, 184, 0.18);
+      border-radius: 16px;
+      background: rgba(2, 6, 23, 0.56);
+      padding: 16px;
+      display: grid;
+      gap: 10px;
+    }
+
+    .practice-session-summary__card h3 {
+      font-size: 0.98rem;
+      font-weight: 800;
+    }
+
+    .practice-session-summary__item {
+      display: flex;
+      justify-content: space-between;
+      gap: 8px;
+      font-size: 0.9rem;
+      color: #cbd5e1;
+    }
+
+    .practice-session-screen {
+      animation: practiceFadeIn 0.22s ease;
+    }
+
+    @keyframes practiceFadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(8px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @media (max-width: 1024px) {
+      .practice-session-layout {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .practice-session-shell {
+        padding: 10px;
+      }
+
+      .practice-session-topbar,
+      .practice-session-shell__body {
+        padding: 14px;
+      }
+
+      .practice-mode-image {
+        min-height: 230px;
+      }
+
+      .practice-session-card--wide {
+        min-height: auto;
+      }
     }
 
     .about-grid {
@@ -1346,6 +2005,24 @@
         padding-bottom: 11px;
       }
 
+      .practice-panel-head,
+      .practice-detail__top,
+      .practice-detail__grid,
+      .practice-summary {
+        grid-template-columns: 1fr;
+        flex-direction: column;
+      }
+
+      .practice-controls {
+        min-width: 0;
+        width: 100%;
+      }
+
+      .practice-detail__actions,
+      .practice-set-card__footer {
+        align-items: stretch;
+      }
+
       .section {
         padding: 64px 0;
       }
@@ -1501,34 +2178,58 @@
       <div class="container">
         <span class="section-label">Practice Tests</span>
         <h2 class="section-title">Prepare Like a Soldier</h2>
-        <p class="section-copy">Five core SSB psychological tests — practice at your own pace.</p>
+        <p class="section-copy">Open one category at a time to reveal its practice sets.</p>
 
         <div class="practice-layout" aria-label="SSB practice tests">
-          <div class="practice-tabs" role="tablist" aria-label="Practice test list">
-            <button type="button" class="practice-tab active" data-test="ppdt" aria-selected="true">PPDT</button>
-            <button type="button" class="practice-tab" data-test="tat" aria-selected="false">TAT</button>
-            <button type="button" class="practice-tab" data-test="wat" aria-selected="false">WAT</button>
-            <button type="button" class="practice-tab" data-test="srt" aria-selected="false">SRT</button>
-            <button type="button" class="practice-tab" data-test="sd" aria-selected="false">SD Practice</button>
+          <div class="practice-tabs" id="practiceCategoryList" role="tablist" aria-label="Practice test categories">
           </div>
 
           <div class="practice-panel">
-            <div class="practice-tag" id="practiceTestTag">PSYCHOLOGICAL TEST</div>
-            <h3 class="practice-title" id="practiceTestTitle">Picture Perception &amp; Description Test</h3>
-            <p class="practice-description" id="practiceTestDescription">View a hazy image for 30 seconds, write a short story, then narrate it in a group.</p>
-
-            <div class="practice-stats">
-              <div class="practice-stat">
-                <strong id="practiceTestStatOneValue">12</strong>
-                <span id="practiceTestStatOneLabel">Practice Sets</span>
-              </div>
-              <div class="practice-stat">
-                <strong id="practiceTestStatTwoValue">30s</strong>
-                <span id="practiceTestStatTwoLabel">Image Time</span>
-              </div>
+            <div class="practice-home-empty" id="practiceHomeEmpty">
+              <div class="practice-tag">CATEGORY LOCKED</div>
+              <h3 class="practice-title">Choose PPDT, TAT, WAT, SRT, or SD Practice</h3>
+              <p class="practice-description">Each category expands on click. Sets stay hidden until you open one, then the right panel reveals only that category’s sets.</p>
             </div>
 
-            <a href="#contact" class="btn btn-primary" id="practiceTestCta">Begin Test →</a>
+            <div class="practice-home-view" id="practiceHomeView" hidden>
+              <div class="practice-panel-head">
+                <div>
+                  <div class="practice-tag" id="practiceTestTag">SCREENING TEST</div>
+                  <h3 class="practice-title" id="practiceTestTitle">Picture Perception &amp; Description Test</h3>
+                  <p class="practice-description" id="practiceTestDescription">Explore multiple practice sets, each designed to strengthen observation, story flow, and confidence.</p>
+                </div>
+
+                <div class="practice-controls">
+                  <label class="sr-only" for="practiceSearch">Search sets</label>
+                  <input id="practiceSearch" class="practice-input" type="search" placeholder="Search sets, topics, or skills" />
+                  <select id="practiceDifficultyFilter" class="practice-select" aria-label="Filter practice sets by difficulty">
+                    <option value="all">All difficulties</option>
+                    <option value="Beginner">Beginner</option>
+                    <option value="Intermediate">Intermediate</option>
+                    <option value="Advanced">Advanced</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="practice-summary">
+                <div class="practice-meta-card">
+                  <strong id="practiceSetCount">0</strong>
+                  <span>Sets available</span>
+                </div>
+                <div class="practice-meta-card">
+                  <strong id="practiceCompletedCount">0</strong>
+                  <span>Completed</span>
+                </div>
+                <div class="practice-meta-card">
+                  <strong id="practiceRouteLabel">/practice/ppdt/set-1</strong>
+                  <span>Current route</span>
+                </div>
+              </div>
+
+              <article class="practice-detail card" id="practiceSelectedSet" aria-live="polite"></article>
+              <div class="practice-grid" id="practiceSetGrid"></div>
+              <div class="practice-empty" id="practiceEmptyState" hidden>No practice sets match your filters.</div>
+            </div>
           </div>
         </div>
       </div>
@@ -1729,6 +2430,8 @@
     </section>
   </main>
 
+  <div id="practiceAppRoot" hidden></div>
+
   <footer class="footer">
     <div class="container">
       <div class="footer-main">
@@ -1770,53 +2473,380 @@
   </a>
 
   <script>
-    const practiceTestData = {
+    if (false) {
+    const practiceCatalog = {
       ppdt: {
-        tag: 'PSYCHOLOGICAL TEST',
+        id: 'ppdt',
+        short: 'PPDT',
+        tag: 'SCREENING TEST',
         title: 'Picture Perception & Description Test',
-        description: 'View a hazy image for 30 seconds, write a short story, then narrate it in a group.',
-        stats: [
-          { value: '12', label: 'Practice Sets' },
-          { value: '30s', label: 'Image Time' }
+        description: 'Practice blurred-picture narration, observation, and first-impression storytelling under pressure.',
+        focus: 'Observation and narration',
+        countsLabel: 'Image set',
+        sets: [
+          { id: 'set-1', title: 'Harbor Rescue Drill', description: 'A crowded dock scene that rewards calm leadership and clear sequencing.', duration: '30s + 4 min', difficulty: 'Beginner', countLabel: '1 image', thumbnail: { label: 'Set 01', from: '#0f172a', to: '#0ea5e9' } },
+          { id: 'set-2', title: 'School Crossing Scene', description: 'A morning traffic moment where quick organization and safety awareness matter.', duration: '30s + 4 min', difficulty: 'Beginner', countLabel: '1 image', thumbnail: { label: 'Set 02', from: '#111827', to: '#2563eb' } },
+          { id: 'set-3', title: 'Village Water Point', description: 'A community queue that tests empathy, initiative, and practical coordination.', duration: '30s + 4 min', difficulty: 'Intermediate', countLabel: '1 image', thumbnail: { label: 'Set 03', from: '#111827', to: '#14b8a6' } },
+          { id: 'set-4', title: 'Railway Platform Delay', description: 'A delayed train platform with mixed crowd behavior and a need for order.', duration: '30s + 4 min', difficulty: 'Intermediate', countLabel: '1 image', thumbnail: { label: 'Set 04', from: '#1e293b', to: '#0f766e' } },
+          { id: 'set-5', title: 'Flood Relief Coordination', description: 'A flood-hit street with rescue and relief tasks that demand composure.', duration: '30s + 4 min', difficulty: 'Advanced', countLabel: '1 image', thumbnail: { label: 'Set 05', from: '#0f172a', to: '#0284c7' } }
         ]
       },
       tat: {
-        tag: 'PSYCHOLOGICAL TEST',
+        id: 'tat',
+        short: 'TAT',
+        tag: 'STORY TEST',
         title: 'Thematic Apperception Test',
-        description: 'Write a meaningful story from a picture prompt. Reveals personality traits, motivation patterns, and social perception under assessment.',
-        stats: [
-          { value: '20', label: 'Practice Sets' },
-          { value: '4 min', label: 'Per Story' }
+        description: 'Write meaningful stories from picture prompts that reveal motivation, personality, and social judgement.',
+        focus: 'Story arc and personality cues',
+        countsLabel: 'Picture prompt',
+        sets: [
+          { id: 'set-1', title: 'Team Rebuild at the Workshop', description: 'A factory repair team must restore production before the evening shift.', duration: '4 min per story', difficulty: 'Beginner', countLabel: '1 prompt', thumbnail: { label: 'Set 01', from: '#1f2937', to: '#f59e0b' } },
+          { id: 'set-2', title: 'Midnight Medical Shift', description: 'A hospital scene where a junior assistant steps in to support the duty doctor.', duration: '4 min per story', difficulty: 'Beginner', countLabel: '1 prompt', thumbnail: { label: 'Set 02', from: '#0f172a', to: '#0ea5e9' } },
+          { id: 'set-3', title: 'Village Library Revival', description: 'A small-town youth group turns an unused room into a learning space.', duration: '4 min per story', difficulty: 'Intermediate', countLabel: '1 prompt', thumbnail: { label: 'Set 03', from: '#0f172a', to: '#22c55e' } },
+          { id: 'set-4', title: 'Cadet Relay Pressure', description: 'A training relay exposes team nerves, discipline, and recovery after a mistake.', duration: '4 min per story', difficulty: 'Intermediate', countLabel: '1 prompt', thumbnail: { label: 'Set 04', from: '#111827', to: '#6366f1' } },
+          { id: 'set-5', title: 'Bridge Inspection Brief', description: 'An urgent check on a bridge approach requires structured action and alert reporting.', duration: '4 min per story', difficulty: 'Advanced', countLabel: '1 prompt', thumbnail: { label: 'Set 05', from: '#0f172a', to: '#f97316' } }
         ]
       },
       wat: {
-        tag: 'WRITTEN TEST',
+        id: 'wat',
+        short: 'WAT',
+        tag: 'WORD TEST',
         title: 'Word Association Test',
-        description: '60 words shown one by one — write the first sentence that comes to mind. Timed strictly at 15 seconds per word.',
-        stats: [
-          { value: '60', label: 'Words' },
-          { value: '15s', label: 'Per Word' }
+        description: 'Practice fast, positive, and original responses under 15-second word flashes.',
+        focus: 'Quick association and optimism',
+        countsLabel: 'Word bank',
+        sets: [
+          { id: 'set-1', title: 'Leadership and Discipline Drill', description: 'High-control words that reward structured action and calm momentum.', duration: '15s per word', difficulty: 'Beginner', countLabel: '60 words', thumbnail: { label: 'Set 01', from: '#0f172a', to: '#1d4ed8' } },
+          { id: 'set-2', title: 'Teamwork and Clarity Drill', description: 'Association set focused on cooperation, communication, and clear priorities.', duration: '15s per word', difficulty: 'Beginner', countLabel: '60 words', thumbnail: { label: 'Set 02', from: '#0f172a', to: '#0891b2' } },
+          { id: 'set-3', title: 'Stress Response Word Bank', description: 'Words designed to test whether you stay constructive under tension.', duration: '15s per word', difficulty: 'Intermediate', countLabel: '60 words', thumbnail: { label: 'Set 03', from: '#111827', to: '#16a34a' } },
+          { id: 'set-4', title: 'Initiative and Follow-Through', description: 'Association practice for movement, accountability, and decisive action.', duration: '15s per word', difficulty: 'Intermediate', countLabel: '60 words', thumbnail: { label: 'Set 04', from: '#1e293b', to: '#ca8a04' } },
+          { id: 'set-5', title: 'Calm Under Pressure', description: 'Advanced set with sharper words that push for confidence and steady judgement.', duration: '15s per word', difficulty: 'Advanced', countLabel: '60 words', thumbnail: { label: 'Set 05', from: '#0f172a', to: '#dc2626' } }
         ]
       },
       srt: {
-        tag: 'SITUATIONAL TEST',
+        id: 'srt',
+        short: 'SRT',
+        tag: 'SITUATION TEST',
         title: 'Situation Reaction Test',
-        description: 'React to 60 real-life situations in writing. Tests practical intelligence, emotional balance, and officer-like qualities.',
-        stats: [
-          { value: '60', label: 'Situations' },
-          { value: '30 min', label: 'Total' }
+        description: 'React to operational and personal situations with practical intelligence and balance.',
+        focus: 'Judgement under time pressure',
+        countsLabel: 'Situation bank',
+        sets: [
+          { id: 'set-1', title: 'Disrupted Convoy Scenario', description: 'A convoy delay tests planning, communication, and prioritisation.', duration: '30 min total', difficulty: 'Beginner', countLabel: '60 situations', thumbnail: { label: 'Set 01', from: '#0f172a', to: '#2563eb' } },
+          { id: 'set-2', title: 'Sudden Power Failure', description: 'A campus blackout needs quick action, calm direction, and safe handling.', duration: '30 min total', difficulty: 'Beginner', countLabel: '60 situations', thumbnail: { label: 'Set 02', from: '#111827', to: '#0ea5e9' } },
+          { id: 'set-3', title: 'Canteen Conflict Resolution', description: 'A small disagreement in a crowded space rewards tact and responsibility.', duration: '30 min total', difficulty: 'Intermediate', countLabel: '60 situations', thumbnail: { label: 'Set 03', from: '#0f172a', to: '#14b8a6' } },
+          { id: 'set-4', title: 'Monsoon Transport Delay', description: 'A logistics delay asks for practical adjustment, communication, and patience.', duration: '30 min total', difficulty: 'Intermediate', countLabel: '60 situations', thumbnail: { label: 'Set 04', from: '#1e293b', to: '#22c55e' } },
+          { id: 'set-5', title: 'Parade Drill Correction', description: 'A training error must be corrected without drama and with disciplined follow-up.', duration: '30 min total', difficulty: 'Advanced', countLabel: '60 situations', thumbnail: { label: 'Set 05', from: '#0f172a', to: '#f59e0b' } }
         ]
       },
       sd: {
-        tag: 'SELF ASSESSMENT',
+        id: 'sd',
+        short: 'SD',
+        tag: 'SELF DESCRIPTION',
         title: 'Self Description Practice',
-        description: 'Write what your parents, friends, teachers, and you think about yourself. Guided prompts build an authentic, consistent self-description.',
-        stats: [
-          { value: '5', label: 'Perspectives' },
-          { value: 'Guided', label: 'Format' }
+        description: 'Build an authentic self-description from multiple perspectives and a consistent personal voice.',
+        focus: 'Self awareness and consistency',
+        countsLabel: 'Perspective set',
+        sets: [
+          { id: 'set-1', title: 'Family and Peers View', description: 'Describe how your family and close friends would honestly describe you.', duration: '20 min', difficulty: 'Beginner', countLabel: '5 viewpoints', thumbnail: { label: 'Set 01', from: '#0f172a', to: '#38bdf8' } },
+          { id: 'set-2', title: 'Teacher and Mentor View', description: 'A cleaner self-image built around discipline, learning, and feedback.', duration: '20 min', difficulty: 'Beginner', countLabel: '5 viewpoints', thumbnail: { label: 'Set 02', from: '#111827', to: '#2563eb' } },
+          { id: 'set-3', title: 'Self Reflection Snapshot', description: 'A direct self-audit of habits, strengths, and the habits you are correcting.', duration: '20 min', difficulty: 'Intermediate', countLabel: '5 viewpoints', thumbnail: { label: 'Set 03', from: '#0f172a', to: '#22c55e' } },
+          { id: 'set-4', title: 'Strengths and Weak Spots', description: 'Practice balanced self-awareness without sounding rehearsed or defensive.', duration: '20 min', difficulty: 'Intermediate', countLabel: '5 viewpoints', thumbnail: { label: 'Set 04', from: '#1e293b', to: '#f59e0b' } },
+          { id: 'set-5', title: 'Aspirations Under Pressure', description: 'Frame your goals, weaknesses, and ambition with maturity and honesty.', duration: '20 min', difficulty: 'Advanced', countLabel: '5 viewpoints', thumbnail: { label: 'Set 05', from: '#0f172a', to: '#ef4444' } }
         ]
       }
     };
+
+    const practiceProgressKey = 'ssb-practice-progress';
+    const practiceProgress = new Set(JSON.parse(localStorage.getItem(practiceProgressKey) || '[]'));
+    const practiceState = {
+      categoryId: 'ppdt',
+      setId: 'set-1',
+      search: '',
+      difficulty: 'all'
+    };
+
+    const practiceUI = {
+      sidebar: document.getElementById('practiceSidebar'),
+      tag: document.getElementById('practiceTestTag'),
+      title: document.getElementById('practiceTestTitle'),
+      description: document.getElementById('practiceTestDescription'),
+      search: document.getElementById('practiceSearch'),
+      difficulty: document.getElementById('practiceDifficultyFilter'),
+      setCount: document.getElementById('practiceSetCount'),
+      completedCount: document.getElementById('practiceCompletedCount'),
+      routeLabel: document.getElementById('practiceRouteLabel'),
+      selectedSet: document.getElementById('practiceSelectedSet'),
+      grid: document.getElementById('practiceSetGrid'),
+      emptyState: document.getElementById('practiceEmptyState')
+    };
+
+    function getPracticeCategory(categoryId) {
+      return practiceCatalog[categoryId] || practiceCatalog.ppdt;
+    }
+
+    function getPracticeSet(category, setId) {
+      return category.sets.find((set) => set.id === setId) || category.sets[0];
+    }
+
+    function practiceRoute(categoryId, setId) {
+      return `/practice/${categoryId}/${setId}`;
+    }
+
+    function parsePracticeRoute(pathname) {
+      const routeMatch = pathname.match(/^\/practice\/([a-z-]+)(?:\/([a-z0-9-]+))\/?$/i);
+
+      if (!routeMatch) {
+        return null;
+      }
+
+      const categoryId = routeMatch[1].toLowerCase();
+      const category = getPracticeCategory(categoryId);
+      const setId = routeMatch[2] || category.sets[0].id;
+      const selectedSet = getPracticeSet(category, setId);
+
+      return {
+        categoryId: category.id,
+        setId: selectedSet.id,
+        route: practiceRoute(category.id, selectedSet.id)
+      };
+    }
+
+    function savePracticeProgress() {
+      localStorage.setItem(practiceProgressKey, JSON.stringify(Array.from(practiceProgress)));
+    }
+
+    function markPracticeProgress(route) {
+      practiceProgress.add(route);
+      savePracticeProgress();
+    }
+
+    function setPracticeLocation(categoryId, setId, replace = false) {
+      const route = practiceRoute(categoryId, setId);
+      const method = replace ? 'replaceState' : 'pushState';
+      window.history[method]({ categoryId, setId }, '', route);
+    }
+
+    function PracticeSidebar(selectedCategoryId) {
+      return Object.values(practiceCatalog).map((category) => {
+        const isActive = category.id === selectedCategoryId;
+
+        return `
+          <button type="button" class="practice-tab${isActive ? ' active' : ''}" data-category="${category.id}" aria-selected="${String(isActive)}">
+            <span>${category.short}</span>
+            <span class="practice-tab-count">${category.sets.length} sets</span>
+          </button>
+        `;
+      }).join('');
+    }
+
+    function PracticeSetCard(category, set, isActive) {
+      const route = practiceRoute(category.id, set.id);
+      const isCompleted = practiceProgress.has(route);
+
+      return `
+        <article class="practice-set-card${isActive ? ' is-active' : ''}" data-route="${route}">
+          <div class="practice-set-card__thumb" style="--thumb-start: ${set.thumbnail.from}; --thumb-end: ${set.thumbnail.to};">
+            <span>${set.thumbnail.label}</span>
+            <span class="practice-badge${isCompleted ? ' practice-badge--success' : ''}">${isCompleted ? 'Completed' : set.difficulty}</span>
+          </div>
+          <div class="practice-set-card__body">
+            <div class="practice-set-card__header">
+              <h4>${set.title}</h4>
+            </div>
+            <p class="practice-set-card__description">${set.description}</p>
+            <div class="practice-set-card__meta">
+              <span>${set.duration}</span>
+              <span>${set.countLabel}</span>
+            </div>
+            <div class="practice-set-card__footer">
+              <span class="practice-set-card__route">${route}</span>
+              <button type="button" class="btn btn-primary" data-practice-action="start" data-route="${route}">Start Practice</button>
+            </div>
+          </div>
+        </article>
+      `;
+    }
+
+    function PracticeSetGrid(category, visibleSets, activeSet) {
+      return visibleSets.map((set) => PracticeSetCard(category, set, set.id === activeSet.id)).join('');
+    }
+
+    function PracticeHeader(category, activeSet, visibleSets) {
+      const activeRoute = practiceRoute(category.id, activeSet.id);
+      const isCompleted = practiceProgress.has(activeRoute);
+
+      return `
+        <div class="practice-detail__top">
+          <div>
+            <div class="practice-detail__eyebrow">${category.tag}</div>
+            <h4 class="practice-detail__title">${activeSet.title}</h4>
+            <p class="practice-detail__description">${activeSet.description}</p>
+          </div>
+          <span class="practice-badge${isCompleted ? ' practice-badge--success' : ''}">${isCompleted ? 'Completed' : activeSet.difficulty}</span>
+        </div>
+        <div class="practice-detail__grid">
+          <div class="practice-detail__metric"><strong>${activeSet.duration}</strong><span>Duration</span></div>
+          <div class="practice-detail__metric"><strong>${activeSet.countLabel}</strong><span>${category.countsLabel}</span></div>
+          <div class="practice-detail__metric"><strong>${visibleSets.length}</strong><span>Visible sets</span></div>
+        </div>
+        <div class="practice-detail__actions">
+          <button type="button" class="btn btn-primary" data-practice-action="start" data-route="${activeRoute}">Start Practice</button>
+          <button type="button" class="btn btn-outline" data-practice-action="complete" data-route="${activeRoute}">Mark Complete</button>
+          <span class="practice-route-label">${activeRoute}</span>
+        </div>
+      `;
+    }
+
+    function PracticePage(state) {
+      const category = getPracticeCategory(state.categoryId);
+      const activeSet = getPracticeSet(category, state.setId);
+      const searchTerm = state.search.trim().toLowerCase();
+      const visibleSets = category.sets.filter((set) => {
+        const matchesSearch = !searchTerm || `${set.title} ${set.description} ${set.duration} ${set.difficulty} ${set.countLabel}`.toLowerCase().includes(searchTerm);
+        const matchesDifficulty = state.difficulty === 'all' || set.difficulty === state.difficulty;
+
+        return matchesSearch && matchesDifficulty;
+      });
+
+      return {
+        category,
+        activeSet,
+        visibleSets,
+        sidebar: PracticeSidebar(category.id),
+        header: PracticeHeader(category, activeSet, visibleSets),
+        grid: PracticeSetGrid(category, visibleSets, activeSet)
+      };
+    }
+
+    function renderPracticeApp() {
+      const page = PracticePage(practiceState);
+
+      practiceUI.sidebar.innerHTML = page.sidebar;
+      practiceUI.tag.textContent = page.category.tag;
+      practiceUI.title.textContent = page.category.title;
+      practiceUI.description.textContent = page.category.description;
+      practiceUI.search.value = practiceState.search;
+      practiceUI.difficulty.value = practiceState.difficulty;
+      practiceUI.setCount.textContent = String(page.visibleSets.length);
+      practiceUI.completedCount.textContent = String(page.visibleSets.filter((set) => practiceProgress.has(practiceRoute(page.category.id, set.id))).length);
+      practiceUI.routeLabel.textContent = practiceRoute(page.category.id, page.activeSet.id);
+      practiceUI.selectedSet.innerHTML = page.header;
+      practiceUI.grid.innerHTML = page.grid;
+      practiceUI.emptyState.hidden = page.visibleSets.length > 0;
+    }
+
+    function updatePracticeUrl(categoryId, setId, replace = false) {
+      const route = practiceRoute(categoryId, setId);
+
+      if (window.location.pathname !== route || replace) {
+        setPracticeLocation(categoryId, setId, replace);
+      }
+    }
+
+    function activatePracticeSet(categoryId, setId, options = {}) {
+      const category = getPracticeCategory(categoryId);
+      const activeSet = getPracticeSet(category, setId);
+
+      practiceState.categoryId = category.id;
+      practiceState.setId = activeSet.id;
+
+      if (options.search !== undefined) {
+        practiceState.search = options.search;
+      }
+
+      if (options.difficulty !== undefined) {
+        practiceState.difficulty = options.difficulty;
+      }
+
+      if (options.markCompleted) {
+        markPracticeProgress(practiceRoute(category.id, activeSet.id));
+      }
+
+      updatePracticeUrl(category.id, activeSet.id, Boolean(options.replaceHistory));
+      renderPracticeApp();
+    }
+
+    function handlePracticeAction(event) {
+      const actionButton = event.target.closest('[data-practice-action]');
+
+      if (!actionButton) {
+        return;
+      }
+
+      const route = actionButton.dataset.route;
+      const [categoryId, setId] = route.split('/').slice(2);
+
+      if (actionButton.dataset.practiceAction === 'complete') {
+        activatePracticeSet(categoryId, setId, { markCompleted: true, replaceHistory: true });
+        return;
+      }
+
+      activatePracticeSet(categoryId, setId, { markCompleted: true });
+      window.scrollTo({ top: document.getElementById('practice-tests').offsetTop - 90, behavior: 'smooth' });
+    }
+
+    function initializePracticeApp() {
+      const route = parsePracticeRoute(window.location.pathname);
+
+      if (route) {
+        practiceState.categoryId = route.categoryId;
+        practiceState.setId = route.setId;
+
+        if (window.location.pathname !== route.route) {
+          setPracticeLocation(route.categoryId, route.setId, true);
+        }
+      } else if (window.location.pathname.startsWith('/practice')) {
+        setPracticeLocation(practiceState.categoryId, practiceState.setId, true);
+      }
+
+      renderPracticeApp();
+    }
+
+    practiceUI.sidebar.addEventListener('click', (event) => {
+      const button = event.target.closest('[data-category]');
+
+      if (!button) {
+        return;
+      }
+
+      practiceState.search = '';
+      practiceState.difficulty = 'all';
+      practiceUI.search.value = '';
+      practiceUI.difficulty.value = 'all';
+      activatePracticeSet(button.dataset.category, getPracticeCategory(button.dataset.category).sets[0].id);
+    });
+
+    practiceUI.search.addEventListener('input', (event) => {
+      practiceState.search = event.target.value;
+      renderPracticeApp();
+    });
+
+    practiceUI.difficulty.addEventListener('change', (event) => {
+      practiceState.difficulty = event.target.value;
+      renderPracticeApp();
+    });
+
+    practiceUI.selectedSet.addEventListener('click', handlePracticeAction);
+    practiceUI.grid.addEventListener('click', handlePracticeAction);
+
+    window.addEventListener('popstate', () => {
+      const route = parsePracticeRoute(window.location.pathname);
+
+      if (route) {
+        practiceState.categoryId = route.categoryId;
+        practiceState.setId = route.setId;
+      } else {
+        practiceState.categoryId = 'ppdt';
+        practiceState.setId = 'set-1';
+      }
+
+      renderPracticeApp();
+    });
+
+    initializePracticeApp();
+
+    }
 
     const themeToggle = document.getElementById('themeToggle');
     const navPanel = document.getElementById('navPanel');
@@ -1825,17 +2855,6 @@
     const form = document.getElementById('contactForm');
     const formMessage = document.getElementById('formMessage');
     const submitBtn = document.getElementById('submitBtn');
-
-    const practicePanel = {
-      tag: document.getElementById('practiceTestTag'),
-      title: document.getElementById('practiceTestTitle'),
-      description: document.getElementById('practiceTestDescription'),
-      statOneValue: document.getElementById('practiceTestStatOneValue'),
-      statOneLabel: document.getElementById('practiceTestStatOneLabel'),
-      statTwoValue: document.getElementById('practiceTestStatTwoValue'),
-      statTwoLabel: document.getElementById('practiceTestStatTwoLabel'),
-      buttons: Array.from(document.querySelectorAll('.practice-tab'))
-    };
 
     function applyTheme(theme) {
       if (theme === 'dark') {
@@ -1878,30 +2897,6 @@
         }
       });
     });
-
-    function setPracticeTest(testKey) {
-      const selected = practiceTestData[testKey] || practiceTestData.ppdt;
-
-      practicePanel.tag.textContent = selected.tag;
-      practicePanel.title.textContent = selected.title;
-      practicePanel.description.textContent = selected.description;
-      practicePanel.statOneValue.textContent = selected.stats[0].value;
-      practicePanel.statOneLabel.textContent = selected.stats[0].label;
-      practicePanel.statTwoValue.textContent = selected.stats[1].value;
-      practicePanel.statTwoLabel.textContent = selected.stats[1].label;
-
-      practicePanel.buttons.forEach((button) => {
-        const isActive = button.dataset.test === testKey;
-        button.classList.toggle('active', isActive);
-        button.setAttribute('aria-selected', String(isActive));
-      });
-    }
-
-    practicePanel.buttons.forEach((button) => {
-      button.addEventListener('click', () => setPracticeTest(button.dataset.test));
-    });
-
-    setPracticeTest('ppdt');
 
     document.querySelectorAll('.faq-item').forEach((item) => {
       const trigger = item.querySelector('.faq-btn');
@@ -1969,5 +2964,6 @@
       }
     });
   </script>
+  <script type="module" src="/practice-engine.js"></script>
 </body>
 </html>

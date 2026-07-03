@@ -3,6 +3,7 @@ const mongoose = require("mongoose");
 const cors = require("cors");
 const nodemailer = require("nodemailer");
 const rateLimit = require("express-rate-limit");
+const path = require("path");
 require("dotenv").config();
 
 const app = express();
@@ -11,11 +12,14 @@ const MONGO_URI = process.env.MONGO_URI;
 const EMAIL_USER = process.env.EMAIL_USER;
 const EMAIL_PASS = process.env.EMAIL_PASS;
 const allowedOrigin = process.env.CLIENT_URL;
+const hasMongoConnection = Boolean(MONGO_URI);
+const hasEmailDelivery = Boolean(EMAIL_USER && EMAIL_PASS);
 
 app.use(cors({
   origin: allowedOrigin,
 }));
 app.use(express.json({ limit: "10kb" }));
+app.use(express.static(path.join(__dirname, "..")));
 
 const limiter = rateLimit({
   windowMs: 15 * 60 * 1000,
@@ -25,18 +29,12 @@ const limiter = rateLimit({
 
 app.use("/contact", limiter);
 
-if (!MONGO_URI) {
-  console.error("Missing MONGO_URI in backend/.env");
-  process.exit(1);
-}
-
-if (!EMAIL_USER || !EMAIL_PASS) {
-  console.error("Missing EMAIL_USER or EMAIL_PASS in backend/.env");
-  process.exit(1);
-}
-
 app.get("/health", (_req, res) => {
   res.status(200).json({ status: "ok" });
+});
+
+app.get("/", (_req, res) => {
+  res.sendFile(path.join(__dirname, "..", "index.html"));
 });
 
 const ContactSchema = new mongoose.Schema({
@@ -47,13 +45,13 @@ const ContactSchema = new mongoose.Schema({
 
 const Contact = mongoose.model("Contact", ContactSchema);
 
-const transporter = nodemailer.createTransport({
+const transporter = hasEmailDelivery ? nodemailer.createTransport({
   service: "gmail",
   auth: {
     user: EMAIL_USER,
     pass: EMAIL_PASS,
   },
-});
+}) : null;
 
 const escapeHtml = (value = "") =>
   String(value)
@@ -79,38 +77,60 @@ app.post("/contact", async (req, res) => {
       return res.status(400).json({ error: "Message too long" });
     }
 
-    const data = await Contact.create({ name, email, message });
+    let data = { name, email, message };
 
-    await transporter.sendMail({
-      from: EMAIL_USER,
-      to: EMAIL_USER,
-      subject: "New Contact Form Submission 🚀",
-      html: `
-        <h3>New Message Received</h3>
-        <p><b>Name:</b> ${escapeHtml(name)}</p>
-        <p><b>Email:</b> ${escapeHtml(email)}</p>
-        <p><b>Message:</b> ${escapeHtml(message || "")}</p>
-      `,
+    if (hasMongoConnection && mongoose.connection.readyState === 1) {
+      data = await Contact.create({ name, email, message });
+    }
+
+    if (transporter) {
+      await transporter.sendMail({
+        from: EMAIL_USER,
+        to: EMAIL_USER,
+        subject: "New Contact Form Submission 🚀",
+        html: `
+          <h3>New Message Received</h3>
+          <p><b>Name:</b> ${escapeHtml(name)}</p>
+          <p><b>Email:</b> ${escapeHtml(email)}</p>
+          <p><b>Message:</b> ${escapeHtml(message || "")}</p>
+        `,
+      });
+    }
+
+    res.status(200).json({
+      message: transporter ? "Saved & Email Sent ✅" : "Saved locally ✅",
+      data,
     });
-
-    res.status(200).json({ message: "Saved & Email Sent ✅", data });
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: "Error processing request ❌" });
   }
 });
 
-const startServer = async () => {
-  try {
-    await mongoose.connect(MONGO_URI);
-    console.log("MongoDB Connected ✅");
+app.use((req, res, next) => {
+  if (req.method !== "GET") {
+    return next();
+  }
 
-    app.listen(PORT, () => {
-      console.log(`Server running on port ${PORT}`);
-    });
+  res.sendFile(path.join(__dirname, "..", "index.html"));
+});
+
+const startServer = async () => {
+  app.listen(PORT, () => {
+    console.log(`Server running on port ${PORT}`);
+  });
+
+  if (!hasMongoConnection) {
+    console.log("MongoDB disabled for local run");
+    return;
+  }
+
+  try {
+    await mongoose.connect(MONGO_URI, { serverSelectionTimeoutMS: 3000 });
+    console.log("MongoDB Connected ✅");
   } catch (error) {
     console.error("MongoDB Error ❌", error.message);
-    process.exit(1);
+    console.log("Continuing without MongoDB");
   }
 };
 
